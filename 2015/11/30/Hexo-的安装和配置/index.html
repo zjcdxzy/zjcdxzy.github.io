@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="telephone=no" name="format-detection"/><meta name="description"/><title>Hexo 的安装和配置 | Hexo</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"/><link rel="stylesheet" type="text/css" href="/css/pure-min.css"/><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"/><link rel="stylesheet" type="text/css" href="/css/style.css"/><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"/><link rel="alternate" type="application/atom+xml" href="/atom.xml"/></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Hexo 的安装和配置</h1><a id="logo" href="/">Hexo</a><p class="description"></p></div><div id="nav-menu"><a href="/" class="current"><i class="icon-home"> 首页</i></a><a href="/archives/"><i class="icon-archive"> 归档</i></a><a href="/about/"><i class="icon-about"> 关于</i></a><a href="/atom.xml"><i class="icon-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post post-page"><h1 class="post-title">Hexo 的安装和配置</h1><div class="post-meta">2015-11-30 | </div><div class="post-content"><p>一、 安装git<br>启动mac终端，在终端中执行命令，查看git是否安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git -- version</span><br></pre></td></tr></table></figure></p>
+<!DOCTYPE html><html lang="null"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="telephone=no" name="format-detection"/><meta name="description"/><title>Hexo 的安装和配置 | Hexo</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"/><link rel="stylesheet" type="text/css" href="/css/pure-min.css"/><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"/><link rel="stylesheet" type="text/css" href="/css/style.css"/><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"/><link rel="alternate" type="application/atom+xml" href="/atom.xml"/></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Hexo 的安装和配置</h1><a id="logo" href="/">Hexo</a><p class="description"></p></div><div id="nav-menu"><a href="/" class="current"><i class="icon-home"> 首页</i></a><a href="/archives/"><i class="icon-archive"> 归档</i></a><a href="/about/"><i class="icon-about"> 关于</i></a><a href="/atom.xml"><i class="icon-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post post-page"><h1 class="post-title">Hexo 的安装和配置</h1><div class="post-meta">2015-11-30 | </div><div class="post-content"><p>一、 安装git<br>启动mac终端，在终端中执行命令，查看git是否安装<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="comment">-- version</span></span><br></pre></td></tr></table></figure></p>
 <p>查看执行的结果:</p>
 <pre><code>zjcs-MacBook-Pro:zjc_HexoBlog zjc$ git --version
-git version <span class="number">2.1</span><span class="number">.3</span><span class="number">.36</span>.g8e36a6d
+  git version <span class="number">2.1</span><span class="number">.3</span><span class="number">.36</span>.g8e36a6d
 </code></pre><p>如果mac系统中没有安装git，启动MAC终端，在终端中执行命令</p>
-<pre><code>ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL         https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span>
+<pre><code>ruby <span class="operator">-e</span> <span class="string">"<span class="variable">$(curl -fsSL   https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span>   
 brew install git
 </code></pre><p>二、安装Node.js<br>启动终端查看node是否安装 </p>
 <pre><code><span class="keyword">node</span><span class="identifier"> </span><span class="title">--version</span> 
@@ -66,12 +66,12 @@ hexo <span class="keyword">server</span>
 <pre><code>localhost:~ zjc$ ssh -T git@github.com
 Hi zjcdxzy! You've successfully authenticated, <span class="keyword">but</span> GitHub <span class="keyword">does</span> <span class="keyword">not</span> provide shell access.
 </code></pre><ul>
-<li>部署Hexo<br>1.在终端中执行命令，</li>
-</ul>
+<li><p>部署Hexo,在终端中执行命令</p>
 <pre><code><span class="title">hexo</span> generate
-
-hexo deploy
-</code></pre><ol>
+   hexo deploy
+</code></pre></li>
+</ul>
+<ol>
 <li>结果出现错误</li>
 </ol>
 <pre><code><span class="built_in">ERROR</span> Deployer <span class="keyword">not</span> found: git
