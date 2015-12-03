@@ -1,4 +1,249 @@
-<!DOCTYPE html><html lang="ch"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="telephone=no" name="format-detection"/><meta name="description" content="爱生活，爱自己"/><title>build-ffmpeg.sh 脚本分析 | zjcdxzy</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"/><link rel="stylesheet" type="text/css" href="/css/pure-min.css"/><link rel="stylesheet" type="text/css" href="/css/grids-responsive-min.css"/><link rel="stylesheet" type="text/css" href="/css/style.css"/><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"/><link rel="alternate" type="application/atom+xml" href="/atom.xml"/></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">build-ffmpeg.sh 脚本分析</h1><a id="logo" href="/">zjcdxzy</a><p class="description">专注写作30年</p></div><div id="nav-menu"><a href="/" class="current"><i class="icon-home"> 首页</i></a><a href="/archives/"><i class="icon-archive"> 归档</i></a><a href="/about/"><i class="icon-about"> 关于</i></a><a href="/atom.xml"><i class="icon-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post post-page"><h1 class="post-title">build-ffmpeg.sh 脚本分析</h1><div class="post-meta">2015-12-01 | <span class="categories">分类于<a href="/categories/Shell/">Shell</a></span></div><div class="post-content"><p>##build-ffmpeg.sh 脚本分析</p>
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="##build-ffmpeg.sh 脚本分析
+脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="build-ffmpeg.sh 脚本分析">
+<meta property="og:url" content="http://yoursite.com/2015/12/01/build-ffmpeg-sh-脚本分析/index.html">
+<meta property="og:site_name" content="zjcdxzy">
+<meta property="og:description" content="##build-ffmpeg.sh 脚本分析
+脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数">
+<meta property="og:updated_time" content="2015-12-02T10:16:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="build-ffmpeg.sh 脚本分析">
+<meta name="twitter:description" content="##build-ffmpeg.sh 脚本分析
+脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> build-ffmpeg.sh 脚本分析 | zjcdxzy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="ch">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zjcdxzy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">专注写作30年</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                build-ffmpeg.sh 脚本分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-12-01T18:53:50+08:00" content="2015-12-01">
+              2015-12-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Shell/" itemprop="url" rel="index">
+                    <span itemprop="name">Shell</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>##build-ffmpeg.sh 脚本分析</p>
 <h3 id="脚本参数的判定">脚本参数的判定</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="string">"$*"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="comment"># 如果脚本的参数是lipo, 对于变量COMPILE 设置为空</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"$*"</span> = <span class="string">"lipo"</span> ]</span><br><span class="line">	<span class="keyword">then</span></span><br><span class="line">		<span class="comment"># skip compile</span></span><br><span class="line">		COMPILE=</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line"><span class="comment"># 将ARCHS 赋值为 脚本对应的参数</span></span><br><span class="line">		ARCHS=<span class="string">"$*"</span></span><br><span class="line"><span class="comment"># 如果是参数的数量是一个，将变量 LIPO 置为空</span></span><br><span class="line">		<span class="keyword">if</span> [ <span class="variable">$#</span> <span class="operator">-eq</span> <span class="number">1</span> ]</span><br><span class="line">		<span class="keyword">then</span></span><br><span class="line">			<span class="comment"># skip lipo</span></span><br><span class="line">			LIPO=</span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 <h3 id="编译流程">编译流程</h3><blockquote>
 <p>待补充。。。</p>
@@ -6,6 +251,383 @@
 <h3 id="合并流程">合并流程</h3><h4 id="lipo_流程拆出，单独放在一个独立的脚本中进行测试">lipo 流程拆出，单独放在一个独立的脚本中进行测试</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="shebang">#!/bin/sh</span><br><span class="line"></span></span><br><span class="line">FAT=<span class="string">"FFmpeg"</span></span><br><span class="line">THIN=`<span class="built_in">pwd</span>`/<span class="string">"thin"</span></span><br><span class="line">ARCHS=<span class="string">"arm64 armv7 x86_64 i386"</span></span><br><span class="line">LIPO=<span class="string">"YES"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># LIPO 默认为yes， FAT 默认为 FFmpeg-iOS</span></span><br><span class="line"><span class="keyword">if</span> [ <span class="string">"<span class="variable">$LIPO</span>"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="string">"building fat binaries..."</span></span><br><span class="line"><span class="comment"># 生成FFMpeg lib最终的存放地址， 使用 mkdir -p 递归的创建</span></span><br><span class="line">    mkdir -p <span class="variable">$FAT</span>/lib</span><br><span class="line"><span class="comment"># 重新指定下，初始化参数 ARCHS="arm64 armv7 x86_64 i386"</span></span><br><span class="line">    <span class="built_in">set</span> - <span class="variable">$ARCHS</span></span><br><span class="line"><span class="comment"># 打印初始化参数 结果为 arm64 armv7 x86_64 i386</span></span><br><span class="line">    <span class="built_in">echo</span> $*</span><br><span class="line">    CWD=`<span class="built_in">pwd</span>`</span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$THIN</span>/<span class="variable">$1</span>/lib</span><br><span class="line">	<span class="comment"># 打印位置  /zjcletv/360云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib</span></span><br><span class="line">    <span class="built_in">echo</span> <span class="variable">$THIN</span>/<span class="variable">$1</span>/lib</span><br><span class="line">    <span class="keyword">for</span> LIB <span class="keyword">in</span> *.a</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">cd</span> <span class="variable">$CWD</span></span><br><span class="line">        <span class="built_in">echo</span> lipo -create `find <span class="variable">$THIN</span> -name <span class="variable">$LIB</span>` -output <span class="variable">$FAT</span>/lib/<span class="variable">$LIB</span> <span class="number">1</span>&gt;&amp;<span class="number">2</span></span><br><span class="line">        lipo -create `find <span class="variable">$THIN</span> -name <span class="variable">$LIB</span>` -output <span class="variable">$FAT</span>/lib/<span class="variable">$LIB</span> || <span class="built_in">exit</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">done</span></span><br><span class="line"><span class="comment"># -rf 强制复制文件夹 将include文件 复制到 FFmpeg 的文件夹之下</span></span><br><span class="line">    <span class="built_in">cd</span> <span class="variable">$CWD</span></span><br><span class="line">    cp -rf <span class="variable">$THIN</span>/<span class="variable">$1</span>/include <span class="variable">$FAT</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 <h4 id="输出的日志">输出的日志</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">localhost:FFmpeg-iOS-build-script-master zjc$ sh lipo.sh </span><br><span class="line">building fat binaries...</span><br><span class="line">arm64 armv7 x86_64 i386</span><br><span class="line">/zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib</span><br><span class="line">lipo -create /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib/libavcodec.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/armv7/lib/libavcodec.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/i386/lib/libavcodec.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/x86_64/lib/libavcodec.a -output FFmpeg/lib/libavcodec.a</span><br><span class="line">lipo -create /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib/libavformat.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/armv7/lib/libavformat.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/i386/lib/libavformat.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/x86_64/lib/libavformat.a -output FFmpeg/lib/libavformat.a</span><br><span class="line">lipo -create /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib/libavutil.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/armv7/lib/libavutil.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/i386/lib/libavutil.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/x86_64/lib/libavutil.a -output FFmpeg/lib/libavutil.a</span><br><span class="line">lipo -create /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib/libpostproc.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/armv7/lib/libpostproc.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/i386/lib/libpostproc.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/x86_64/lib/libpostproc.a -output FFmpeg/lib/libpostproc.a</span><br><span class="line">lipo -create /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib/libswresample.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/armv7/lib/libswresample.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/i386/lib/libswresample.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/x86_64/lib/libswresample.a -output FFmpeg/lib/libswresample.a</span><br><span class="line">lipo -create /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/arm64/lib/libswscale.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/armv7/lib/libswscale.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/i386/lib/libswscale.a /zjcletv/<span class="number">360</span>云盘/FFmpeg-iOS-build-script-master/thin/x86_64/lib/libswscale.a -output FFmpeg/lib/libswscale.a</span><br></pre></td></tr></table></figure>
 <p><em>对 <code>1&gt;&amp;2</code>重定向解析：<br><a href="http://www.cnblogs.com/zhaobin/archive/2009/06/25/1511163.html" target="_blank" rel="external">http://www.cnblogs.com/zhaobin/archive/2009/06/25/1511163.html</a> </em></p>
-</div><div class="tags"></div><div class="post-nav"><a href="/2015/12/01/hello-Hexo/" class="next">Hello Hexo<i class="icon-next"></i></a></div></div></div></div><div class="pure-u-1-4"><div id="sidebar"><div class="widget"><div class="widget-title">分类</div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Player/">Player</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Tips/">Tips</a></li></ul></div><div class="widget"><div class="widget-title">标签</div><div class="tagcloud"><a href="/tags/search/" style="font-size: 15px;">search</a> <a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a></div></div><div class="widget"><div class="widget-title">最新文章</div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2015/12/01/build-ffmpeg-sh-脚本分析/">build-ffmpeg.sh 脚本分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/01/hello-Hexo/">Hello Hexo</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/01/shell-中-bash、、0、-之间的区别/">shell 中-bash、、0、 之间的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/12/01/Shell单引号和双引号的区别/">Shell单引号和双引号的区别</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/30/FFMpeg-资源文件整理/">FFMpeg 资源文件整理</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/30/VideoToolBox-学习资料/">VideoToolBox 学习资料</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/30/能力要求/">能力要求</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/30/cocoapods的安装和使用/">cocoapods的安装和使用</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/30/常用的搜索技巧/">常用的搜索技巧</a></li><li class="post-list-item"><a class="post-list-link" href="/2015/11/30/Hexo-的安装和配置/">Hexo 的安装和配置</a></li></ul></div><div class="widget"><div class="widget-title">友情链接</div><ul></ul><a href="http://www.jianshu.com/users/5018ad3b272f/latest_articles" title="简书" target="_blank">简书</a></div></div></div></div><div id="footer">© <a href="/" rel="nofollow">zjcdxzy.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div><a id="rocket" href="#top" class="show"></a><script src="/js/jquery.min.js" type="text/javascript"></script>
-<script src="/js/totop.js" type="text/javascript"></script><script src="/js/fancybox.pack.js" type="text/javascript"></script>
-<script src="/js/jquery.fancybox.js" type="text/javascript"></script><link rel="stylesheet" href="/css/jquery.fancybox.css" type="text/css"></div></body></html>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/01/hello-Hexo/" rel="next" title="Hello Hexo">
+                <i class="fa fa-chevron-left"></i> Hello Hexo
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="张俊超" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">张俊超</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">爱生活，爱自己</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本参数的判定"><span class="nav-number">1.</span> <span class="nav-text">脚本参数的判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译流程"><span class="nav-number">2.</span> <span class="nav-text">编译流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#合并流程"><span class="nav-number">3.</span> <span class="nav-text">合并流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lipo_流程拆出，单独放在一个独立的脚本中进行测试"><span class="nav-number">3.1.</span> <span class="nav-text">lipo 流程拆出，单独放在一个独立的脚本中进行测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出的日志"><span class="nav-number">3.2.</span> <span class="nav-text">输出的日志</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">张俊超</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
