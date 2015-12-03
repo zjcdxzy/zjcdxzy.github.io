@@ -1,0 +1,685 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="ffmpeg," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="对于播放器的截屏功能实现的整理硬解播放器MPMoviePlayerController 中直接提供关于截屏的接口123// Returns a thumbnail at the given time.// Deprecated.  Use -requestThumbnailImagesAtTimes:timeOption: / MPMoviePlayerThumbnailImageRequestD">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS软解和硬解播放器截屏">
+<meta property="og:url" content="http://yoursite.com/2015/12/03/iOS软解和硬解播放器截屏/index.html">
+<meta property="og:site_name" content="zjcdxzy">
+<meta property="og:description" content="对于播放器的截屏功能实现的整理硬解播放器MPMoviePlayerController 中直接提供关于截屏的接口123// Returns a thumbnail at the given time.// Deprecated.  Use -requestThumbnailImagesAtTimes:timeOption: / MPMoviePlayerThumbnailImageRequestD">
+<meta property="og:updated_time" content="2015-12-03T10:17:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS软解和硬解播放器截屏">
+<meta name="twitter:description" content="对于播放器的截屏功能实现的整理硬解播放器MPMoviePlayerController 中直接提供关于截屏的接口123// Returns a thumbnail at the given time.// Deprecated.  Use -requestThumbnailImagesAtTimes:timeOption: / MPMoviePlayerThumbnailImageRequestD">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> iOS软解和硬解播放器截屏 | zjcdxzy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zjcdxzy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">专注写作30年</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                iOS软解和硬解播放器截屏
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-03T17:20:21+08:00" content="2015-12-03">
+              2015-12-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Player/" itemprop="url" rel="index">
+                    <span itemprop="name">Player</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="对于播放器的截屏功能实现的整理">对于播放器的截屏功能实现的整理</h2><h3 id="硬解播放器">硬解播放器</h3><h4 id="MPMoviePlayerController_中直接提供关于截屏的接口">MPMoviePlayerController 中直接提供关于截屏的接口</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Returns a thumbnail at the given time.</span><br><span class="line">// Deprecated.  Use -requestThumbnailImagesAtTimes:timeOption: / MPMoviePlayerThumbnailImageRequestDidFinishNotification instead.</span><br><span class="line">- (UIImage *)thumbnailImageAtTime:(NSTimeInterval)playbackTime timeOption:(MPMovieTimeOption)option NS_DEPRECATED_IOS(<span class="number">3</span>_2, <span class="number">7</span>_0);</span><br></pre></td></tr></table></figure>
+<p>接受两个参数：</p>
+<p>playbackTime：当前的播放时间<br>MPMovieTimeOption：增加一个时间的选项 </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Thumbnails</span><br><span class="line"></span><br><span class="line">typedef NS_ENUM(NSInteger, MPMovieTimeOption) &#123;</span><br><span class="line">    MPMovieTimeOptionNearestKeyFrame,       // 按照视频时间附近的关键帧截取</span><br><span class="line">    MPMovieTimeOptionExact					// 按照传入的时间直接截取</span><br><span class="line">&#125; NS_DEPRECATED_IOS(<span class="number">3</span>_2, <span class="number">9</span>_0) __TVOS_PROHIBITED;</span><br></pre></td></tr></table></figure>
+<p>MPMoviePlayerController截屏函数调用代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (UIImage *)thumbnailImageAtCurrentTime</span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">#pragma clang diagnostic push</span></span><br><span class="line"><span class="comment">#pragma clang diagnostic ignored "-Wdeprecated-declarations"</span></span><br><span class="line">    <span class="built_in">return</span> [super thumbnailImageAtTime:self.currentPlaybackTime timeOption:MPMovieTimeOptionExact];</span><br><span class="line"><span class="comment">#pragma clang diagnostic pop</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="AVPlayer_截屏">AVPlayer 截屏</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (UIImage *)thumbnailImageAtCurrentTime</span><br><span class="line">&#123;</span><br><span class="line">    AVAssetImageGenerator *imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_playAsset]; // 初始化AVAssetImageGenerator</span><br><span class="line">    NSError *error = nil;</span><br><span class="line">    CMTime time = CMTimeMakeWithSeconds(self.currentPlaybackTime, <span class="number">1</span>); // 获取当前的时间戳</span><br><span class="line">    CMTime actualTime;</span><br><span class="line">    CGImageRef cgImage = [imageGenerator copyCGImageAtTime:time actualTime:&amp;actualTime error:&amp;error]; // 从imageGenerator 取出时间戳 </span><br><span class="line">    UIImage *image = [UIImage imageWithCGImage:cgImage];</span><br><span class="line">    <span class="built_in">return</span> image;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="软解播放器的截屏">软解播放器的截屏</h3><p>实质是对于OpenGL ES 渲染层的截取 </p>
+<ul>
+<li>对于iOS 7 以及以上的版本</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- (UIImage*)snapshotInternalOnIOS7AndLater</span><br><span class="line">&#123;</span><br><span class="line">    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, <span class="number">0.0</span>);</span><br><span class="line">    // Render our snapshot into the image context</span><br><span class="line">    [self drawViewHierarchyInRect:self.bounds afterScreenUpdates:NO]; // 该方法只有在iOS <span class="number">7</span>之后才可用</span><br><span class="line"></span><br><span class="line">    // Grab the image from the context</span><br><span class="line">    UIImage *complexViewImage = UIGraphicsGetImageFromCurrentImageContext();</span><br><span class="line">    // Finish using the context</span><br><span class="line">    UIGraphicsEndImageContext();</span><br><span class="line"></span><br><span class="line">    <span class="built_in">return</span> complexViewImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对于低于iOS 7 的版本</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (UIImage*)snapshotInternalOnIOS6AndBefore</span><br><span class="line">&#123;</span><br><span class="line">    EAGLContext *prevContext = [EAGLContext currentContext];</span><br><span class="line">    [EAGLContext <span class="built_in">set</span>CurrentContext:_context];</span><br><span class="line"></span><br><span class="line">    GLint backingWidth, backingHeight;</span><br><span class="line"></span><br><span class="line">    // Bind the color renderbuffer used to render the OpenGL ES view</span><br><span class="line">    // If your application only creates a single color renderbuffer <span class="built_in">which</span> is already bound at this point,</span><br><span class="line">    // this call is redundant, but it is needed <span class="keyword">if</span> you<span class="string">'re dealing with multiple renderbuffers.</span><br><span class="line">    // Note, replace "viewRenderbuffer" with the actual name of the renderbuffer object defined in your class.</span><br><span class="line">    glBindRenderbuffer(GL_RENDERBUFFER, _renderbuffer);</span><br><span class="line"></span><br><span class="line">    // Get the size of the backing CAEAGLLayer</span><br><span class="line">    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_WIDTH, &amp;backingWidth);</span><br><span class="line">    glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &amp;backingHeight);</span><br><span class="line"></span><br><span class="line">    NSInteger x = 0, y = 0, width = backingWidth, height = backingHeight;</span><br><span class="line">    NSInteger dataLength = width * height * 4;</span><br><span class="line">    GLubyte *data = (GLubyte*)malloc(dataLength * sizeof(GLubyte));</span><br><span class="line"></span><br><span class="line">    // Read pixel data from the framebuffer</span><br><span class="line">    glPixelStorei(GL_PACK_ALIGNMENT, 4);</span><br><span class="line">    glReadPixels((int)x, (int)y, (int)width, (int)height, GL_RGBA, GL_UNSIGNED_BYTE, data);</span><br><span class="line"></span><br><span class="line">    // Create a CGImage with the pixel data</span><br><span class="line">    // If your OpenGL ES content is opaque, use kCGImageAlphaNoneSkipLast to ignore the alpha channel</span><br><span class="line">    // otherwise, use kCGImageAlphaPremultipliedLast</span><br><span class="line">    CGDataProviderRef ref = CGDataProviderCreateWithData(NULL, data, dataLength, NULL);</span><br><span class="line">    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();</span><br><span class="line">    CGImageRef iref = CGImageCreate(width, height, 8, 32, width * 4, colorspace, kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast,</span><br><span class="line">                                    ref, NULL, true, kCGRenderingIntentDefault);</span><br><span class="line"></span><br><span class="line">    [EAGLContext setCurrentContext:prevContext];</span><br><span class="line"></span><br><span class="line">    // OpenGL ES measures data in PIXELS</span><br><span class="line">    // Create a graphics context with the target size measured in POINTS</span><br><span class="line">    UIGraphicsBeginImageContext(CGSizeMake(width, height));</span><br><span class="line"></span><br><span class="line">    CGContextRef cgcontext = UIGraphicsGetCurrentContext();</span><br><span class="line">    // UIKit coordinate system is upside down to GL/Quartz coordinate system</span><br><span class="line">    // Flip the CGImage by rendering it to the flipped bitmap context</span><br><span class="line">    // The size of the destination area is measured in POINTS</span><br><span class="line">    CGContextSetBlendMode(cgcontext, kCGBlendModeCopy);</span><br><span class="line">    CGContextDrawImage(cgcontext, CGRectMake(0.0, 0.0, width, height), iref);</span><br><span class="line"></span><br><span class="line">    // Retrieve the UIImage from the current context</span><br><span class="line">    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();</span><br><span class="line">    UIGraphicsEndImageContext();</span><br><span class="line"></span><br><span class="line">    // Clean up</span><br><span class="line">    free(data);</span><br><span class="line">    CFRelease(ref);</span><br><span class="line">    CFRelease(colorspace);</span><br><span class="line">    CGImageRelease(iref);</span><br><span class="line"></span><br><span class="line">    return image;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ffmpeg/" rel="tag">#ffmpeg</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/01/build-ffmpeg-sh-脚本分析/" rel="next" title="build-ffmpeg.sh 脚本分析">
+                <i class="fa fa-chevron-left"></i> build-ffmpeg.sh 脚本分析
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/03/Unix命令学习/" rel="prev" title="Unix命令学习">
+                Unix命令学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="http://7xosar.com1.z0.glb.clouddn.com/avatar.jpg" alt="zjcdxzy" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zjcdxzy</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">爱生活，爱自己</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/zjcdxzy" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/5018ad3b272f/latest_articles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 简书
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#对于播放器的截屏功能实现的整理"><span class="nav-number">1.</span> <span class="nav-text">对于播放器的截屏功能实现的整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#硬解播放器"><span class="nav-number">1.1.</span> <span class="nav-text">硬解播放器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MPMoviePlayerController_中直接提供关于截屏的接口"><span class="nav-number">1.1.1.</span> <span class="nav-text">MPMoviePlayerController 中直接提供关于截屏的接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AVPlayer_截屏"><span class="nav-number">1.1.2.</span> <span class="nav-text">AVPlayer 截屏</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软解播放器的截屏"><span class="nav-number">1.2.</span> <span class="nav-text">软解播放器的截屏</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zjcdxzy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
