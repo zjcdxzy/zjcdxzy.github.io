@@ -51,19 +51,52 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="description" content="##分析使用子工程对项目进行模块化的优势和劣势
+
+便于打包，简单的修改可直接生成静态库。
+
+
+模块更加明确，不仅时逻辑是的模块化，而是更加具体的模块，可以直接进行移植和使用。
+
+比如播放模块或者数据解析模块，不需要做过多修改就可以直接使用在iPad上，或者新的项目上。
+
+
+一个子工程建立的模块内部，功能进行分发时更加的方便。
+
+比如播放的子工程，需要对软解播放和硬解播放进行拆分，新建一个点播的Ta">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello Hexo">
-<meta property="og:url" content="http://yoursite.com/2015/11/23/hello-Hexo/index.html">
+<meta property="og:title" content="工程模块化">
+<meta property="og:url" content="http://yoursite.com/2015/12/04/工程模块化/index.html">
 <meta property="og:site_name" content="zjcdxzy">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
-<meta property="og:updated_time" content="2015-12-03T10:23:50.000Z">
+<meta property="og:description" content="##分析使用子工程对项目进行模块化的优势和劣势
+
+便于打包，简单的修改可直接生成静态库。
+
+
+模块更加明确，不仅时逻辑是的模块化，而是更加具体的模块，可以直接进行移植和使用。
+
+比如播放模块或者数据解析模块，不需要做过多修改就可以直接使用在iPad上，或者新的项目上。
+
+
+一个子工程建立的模块内部，功能进行分发时更加的方便。
+
+比如播放的子工程，需要对软解播放和硬解播放进行拆分，新建一个点播的Ta">
+<meta property="og:updated_time" content="2015-12-04T07:51:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello Hexo">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick">
+<meta name="twitter:title" content="工程模块化">
+<meta name="twitter:description" content="##分析使用子工程对项目进行模块化的优势和劣势
+
+便于打包，简单的修改可直接生成静态库。
+
+
+模块更加明确，不仅时逻辑是的模块化，而是更加具体的模块，可以直接进行移植和使用。
+
+比如播放模块或者数据解析模块，不需要做过多修改就可以直接使用在iPad上，或者新的项目上。
+
+
+一个子工程建立的模块内部，功能进行分发时更加的方便。
+
+比如播放的子工程，需要对软解播放和硬解播放进行拆分，新建一个点播的Ta">
 
 
 
@@ -75,7 +108,7 @@ Quick">
   };
 </script>
 
-  <title> Hello Hexo | zjcdxzy </title>
+  <title> 工程模块化 | zjcdxzy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -215,7 +248,7 @@ Quick">
             
             
               
-                Hello Hexo
+                工程模块化
               
             
           </h1>
@@ -224,8 +257,8 @@ Quick">
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-23T17:20:21+08:00" content="2015-11-23">
-              2015-11-23
+            <time itemprop="dateCreated" datetime="2015-12-04T15:50:17+08:00" content="2015-12-04">
+              2015-12-04
             </time>
           </span>
 
@@ -263,16 +296,29 @@ Quick">
       
 
       
-        <span itemprop="articleBody"><p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-</span>
+        <span itemprop="articleBody"><p>##分析使用子工程对项目进行模块化的优势和劣势</p>
+<ol>
+<li>便于打包，简单的修改可直接生成静态库。</li>
+</ol>
+<ol>
+<li><p>模块更加明确，不仅时逻辑是的模块化，而是更加具体的模块，可以直接进行移植和使用。</p>
+<ul>
+<li>比如播放模块或者数据解析模块，不需要做过多修改就可以直接使用在iPad上，或者新的项目上。</li>
+</ul>
+</li>
+<li><p>一个子工程建立的模块内部，功能进行分发时更加的方便。</p>
+<ul>
+<li>比如播放的子工程，需要对软解播放和硬解播放进行拆分，新建一个点播的Target,便可以很方便的使用.</li>
+</ul>
+</li>
+</ol>
+<pre><code>!<span class="attr_selector">[]</span>(<span class="attribute">http</span>:<span class="comment">//7xosar.com1.z0.glb.clouddn.com/vod_target.png)</span>
+
+- 可以在工程配置的预编译选项中定义参数，便于在代码中对不同target引用的代码进行区分 
+
+
+![](<span class="attribute">http</span>:<span class="comment">//7xosar.com1.z0.glb.clouddn.com/buildsetting_preprocessing.png)</span>
+</code></pre></span>
       
     </div>
 
@@ -283,13 +329,13 @@ Quick">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2015/12/03/Unix命令学习/" rel="next" title="Unix命令学习">
+                <i class="fa fa-chevron-left"></i> Unix命令学习
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/30/Hexo-的安装和配置/" rel="prev" title="Hexo 的安装和配置">
-                Hexo 的安装和配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -421,7 +467,7 @@ Quick">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick_Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create_a_new_post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run_server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate_static_files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy_to_remote_sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
