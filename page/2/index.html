@@ -197,11 +197,127 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/30/cocoapods的安装和使用/" itemprop="url">
+                  cocoapods的安装和使用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-11-30T20:15:04+08:00" content="2015-11-30">
+              2015-11-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Tips/" itemprop="url" rel="index">
+                    <span itemprop="name">Tips</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+              <ul>
+<li>gem sources –remove <code>https://rubygems.org/</code></li>
+<li>gem sources - a <code>http://ruby.taobao.org/</code></li>
+<li>gem sources -l </li>
+<li>mac执行命令 sudo gem install cocoapods </li>
+</ul>
+<p>如果安装仍然失败，使用https的淘宝的ruby源</p>
+<ul>
+<li>gem sources –remove <code>http://ruby.taobao.org/</code></li>
+<li>gem sources - a <code>https://ruby.taobao.org/</code></li>
+</ul>
+<p>下图为安装成功</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zjcs-MacBook-Pro:~ zjc$ sudo gem install cocoapods</span><br><span class="line">Fetching: cocoapods-<span class="number">0.39</span><span class="number">.0</span>.gem (<span class="number">100</span>%)</span><br><span class="line">Successfully installed cocoapods-<span class="number">0.39</span><span class="number">.0</span></span><br><span class="line">Parsing documentation <span class="keyword">for</span> cocoapods-<span class="number">0.39</span><span class="number">.0</span></span><br><span class="line">Installing ri documentation <span class="keyword">for</span> cocoapods-<span class="number">0.39</span><span class="number">.0</span></span><br><span class="line"><span class="number">1</span> gem installed</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用的 pod setup ，直接下载podfile中对应的第三方库</li>
+<li>pod help 查看pod对应的命令如下</li>
+</ul>
+<p>Usage:</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    $ pod COMMAND</span><br><span class="line"></span><br><span class="line">     CocoaPods, the Cocoa <span class="keyword">library</span> <span class="keyword">package</span> manager.</span><br></pre></td></tr></table></figure>
+<p>Commands:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    + cache      Manipulate the CocoaPods cache</span><br><span class="line">    + init       Generate a Podfile <span class="keyword">for</span> the current directory.</span><br><span class="line">    + install    Install project dependencies to Podfile.lock versions</span><br><span class="line">    + ipc        Inter-process communication</span><br><span class="line">    + lib        Develop pods</span><br><span class="line">    + list       List pods</span><br><span class="line">    + outdated   Show outdated project dependencies</span><br><span class="line">    + plugins    Show available CocoaPods plugins</span><br><span class="line">    + repo       Manage spec-repositories</span><br><span class="line">    + search     Search <span class="keyword">for</span> pods.</span><br><span class="line">    + setup      Setup the CocoaPods environment</span><br><span class="line">    + spec       Manage pod specs</span><br><span class="line">    + trunk      Interact with the CocoaPods API (e.g. publishing new specs)</span><br><span class="line">    + try        Try a Pod!</span><br><span class="line">    + update     Update outdated project dependencies and create new</span><br><span class="line">                 Podfile.lock</span><br></pre></td></tr></table></figure>
+<p>Options:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    --silent     Show nothing</span><br><span class="line">    --version    Show the version of the tool</span><br><span class="line">    --verbose    Show more debugging information</span><br><span class="line">    --no-ansi    Show output without ANSI codes</span><br><span class="line">    --help       Show <span class="built_in">help</span> banner of specified <span class="built_in">command</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>MAC <code>CocoaPods</code>卸载命令  sudo gem uninstall cocoapods</li>
+</ul>
+
+            
+          </span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -652,7 +768,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
