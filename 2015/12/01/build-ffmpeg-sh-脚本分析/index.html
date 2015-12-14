@@ -51,19 +51,16 @@
 
 
 
-<meta name="description" content="##build-ffmpeg.sh 脚本分析
-脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数">
+<meta name="description" content="脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数的数量是一个，将变量 LIPO 置为空		if">
 <meta property="og:type" content="article">
 <meta property="og:title" content="build-ffmpeg.sh 脚本分析">
 <meta property="og:url" content="http://yoursite.com/2015/12/01/build-ffmpeg-sh-脚本分析/index.html">
 <meta property="og:site_name" content="zjcdxzy">
-<meta property="og:description" content="##build-ffmpeg.sh 脚本分析
-脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数">
-<meta property="og:updated_time" content="2015-12-14T02:16:11.000Z">
+<meta property="og:description" content="脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数的数量是一个，将变量 LIPO 置为空		if">
+<meta property="og:updated_time" content="2015-12-14T11:33:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="build-ffmpeg.sh 脚本分析">
-<meta name="twitter:description" content="##build-ffmpeg.sh 脚本分析
-脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数">
+<meta name="twitter:description" content="脚本参数的判定123456789101112131415161718if [ &quot;$*&quot; ]then# 如果脚本的参数是lipo, 对于变量COMPILE 设置为空	if [ &quot;$*&quot; = &quot;lipo&quot; ]	then		# skip compile		COMPILE=	else# 将ARCHS 赋值为 脚本对应的参数		ARCHS=&quot;$*&quot;# 如果是参数的数量是一个，将变量 LIPO 置为空		if">
 
 
 
@@ -263,8 +260,7 @@
       
 
       
-        <span itemprop="articleBody"><p>##build-ffmpeg.sh 脚本分析</p>
-<h3 id="脚本参数的判定">脚本参数的判定</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="string">"$*"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="comment"># 如果脚本的参数是lipo, 对于变量COMPILE 设置为空</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"$*"</span> = <span class="string">"lipo"</span> ]</span><br><span class="line">	<span class="keyword">then</span></span><br><span class="line">		<span class="comment"># skip compile</span></span><br><span class="line">		COMPILE=</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line"><span class="comment"># 将ARCHS 赋值为 脚本对应的参数</span></span><br><span class="line">		ARCHS=<span class="string">"$*"</span></span><br><span class="line"><span class="comment"># 如果是参数的数量是一个，将变量 LIPO 置为空</span></span><br><span class="line">		<span class="keyword">if</span> [ <span class="variable">$#</span> <span class="operator">-eq</span> <span class="number">1</span> ]</span><br><span class="line">		<span class="keyword">then</span></span><br><span class="line">			<span class="comment"># skip lipo</span></span><br><span class="line">			LIPO=</span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+        <span itemprop="articleBody"><h3 id="脚本参数的判定">脚本参数的判定</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ <span class="string">"$*"</span> ]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line"><span class="comment"># 如果脚本的参数是lipo, 对于变量COMPILE 设置为空</span></span><br><span class="line">	<span class="keyword">if</span> [ <span class="string">"$*"</span> = <span class="string">"lipo"</span> ]</span><br><span class="line">	<span class="keyword">then</span></span><br><span class="line">		<span class="comment"># skip compile</span></span><br><span class="line">		COMPILE=</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line"><span class="comment"># 将ARCHS 赋值为 脚本对应的参数</span></span><br><span class="line">		ARCHS=<span class="string">"$*"</span></span><br><span class="line"><span class="comment"># 如果是参数的数量是一个，将变量 LIPO 置为空</span></span><br><span class="line">		<span class="keyword">if</span> [ <span class="variable">$#</span> <span class="operator">-eq</span> <span class="number">1</span> ]</span><br><span class="line">		<span class="keyword">then</span></span><br><span class="line">			<span class="comment"># skip lipo</span></span><br><span class="line">			LIPO=</span><br><span class="line">		<span class="keyword">fi</span></span><br><span class="line">	<span class="keyword">fi</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
 <h3 id="编译流程">编译流程</h3><blockquote>
 <p>待补充。。。</p>
 </blockquote>
