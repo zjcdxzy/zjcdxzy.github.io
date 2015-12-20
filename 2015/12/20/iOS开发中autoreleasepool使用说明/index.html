@@ -51,37 +51,25 @@
 
 
 
-<meta name="description" content="iOS 脚本：
-
-FFmpeg: https://github.com/kewlbear/FFmpeg-iOS-build-script
-X264：
- https://github.com/kewlbear/x264-ios https://github.com/depthlove/x264-iOS-build-script (修改)
-
-fdk-aac：
- https://github.com/v">
+<meta name="description" content="Documenthttps://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html
+About Autorelease Pool Blocks
+代码块
+ 1@autoreleasepool &amp;#123;&amp;#10;    // Code t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="FFMpeg 资源文件整理">
-<meta property="og:url" content="http://yoursite.com/2015/11/30/FFMpeg-资源文件整理/index.html">
+<meta property="og:title" content="iOS开发中@autoreleasepool使用说明">
+<meta property="og:url" content="http://yoursite.com/2015/12/20/iOS开发中autoreleasepool使用说明/index.html">
 <meta property="og:site_name" content="zjcdxzy">
-<meta property="og:description" content="iOS 脚本：
-
-FFmpeg: https://github.com/kewlbear/FFmpeg-iOS-build-script
-X264：
- https://github.com/kewlbear/x264-ios https://github.com/depthlove/x264-iOS-build-script (修改)
-
-fdk-aac：
- https://github.com/v">
-<meta property="og:updated_time" content="2015-12-14T02:16:11.000Z">
+<meta property="og:description" content="Documenthttps://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html
+About Autorelease Pool Blocks
+代码块
+ 1@autoreleasepool &amp;#123;&amp;#10;    // Code t">
+<meta property="og:updated_time" content="2015-12-20T10:25:28.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="FFMpeg 资源文件整理">
-<meta name="twitter:description" content="iOS 脚本：
-
-FFmpeg: https://github.com/kewlbear/FFmpeg-iOS-build-script
-X264：
- https://github.com/kewlbear/x264-ios https://github.com/depthlove/x264-iOS-build-script (修改)
-
-fdk-aac：
- https://github.com/v">
+<meta name="twitter:title" content="iOS开发中@autoreleasepool使用说明">
+<meta name="twitter:description" content="Documenthttps://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html
+About Autorelease Pool Blocks
+代码块
+ 1@autoreleasepool &amp;#123;&amp;#10;    // Code t">
 
 
 
@@ -93,7 +81,7 @@ fdk-aac：
   };
 </script>
 
-  <title> FFMpeg 资源文件整理 | zjcdxzy </title>
+  <title> iOS开发中@autoreleasepool使用说明 | zjcdxzy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -233,7 +221,7 @@ fdk-aac：
             
             
               
-                FFMpeg 资源文件整理
+                iOS开发中@autoreleasepool使用说明
               
             
           </h1>
@@ -242,8 +230,8 @@ fdk-aac：
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-11-30T20:27:32+08:00" content="2015-11-30">
-              2015-11-30
+            <time itemprop="dateCreated" datetime="2015-12-20T17:35:37+08:00" content="2015-12-20">
+              2015-12-20
             </time>
           </span>
 
@@ -252,8 +240,8 @@ fdk-aac：
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Player/" itemprop="url" rel="index">
-                    <span itemprop="name">Player</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -281,18 +269,42 @@ fdk-aac：
       
 
       
-        <span itemprop="articleBody"><p>iOS 脚本：</p>
+        <span itemprop="articleBody"><h1 id="Document">Document</h1><p><a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html" target="_blank" rel="external">https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html</a></p>
+<h1 id="About_Autorelease_Pool_Blocks">About Autorelease Pool Blocks</h1><ol>
+<li><p>代码块</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10;    // Code that creates autoreleased objects.&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<pre><code>**At the <span class="keyword">end</span> <span class="keyword">of</span> the autorelease pool <span class="keyword">block</span>, objects that received an autorelease message within the <span class="keyword">block</span> are sent a <span class="keyword">release</span> message—an object receives a <span class="keyword">release</span> message <span class="keyword">for</span> each <span class="typename">time</span> it was sent an autorelease message within the <span class="keyword">block</span>.**
+
+&gt; 在的autoreleasepool代码块执行结束的时候，自动释放池收到一条autorelease消息，池中的对象收到一条<span class="keyword">release</span>的消息。
+</code></pre><ol>
+<li><p>autorelease的嵌套使用</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10;   // . . .&#10;  &#9;&#9; @autoreleasepool &#123;&#10;       &#9;// . . .&#10;   &#9;&#9;&#125;&#10;   . . .&#10;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Using_Autorelease_Pool_Blocks">Using Autorelease Pool Blocks</h1><p><em>There are, however, three occasions when you might use your own autorelease pool blocks:</em></p>
 <ul>
-<li>FFmpeg: <a href="https://github.com/kewlbear/FFmpeg-iOS-build-script" target="_blank" rel="external">https://github.com/kewlbear/FFmpeg-iOS-build-script</a></li>
-<li><p>X264：</p>
-<p> <a href="https://github.com/kewlbear/x264-ios" target="_blank" rel="external">https://github.com/kewlbear/x264-ios</a><br> <a href="https://github.com/depthlove/x264-iOS-build-script" target="_blank" rel="external">https://github.com/depthlove/x264-iOS-build-script</a> (修改)</p>
+<li><p>If you are writing a program that is not based on a UI framework, such as a command-line tool.</p>
 </li>
-<li><p>fdk-aac：</p>
-<p> <a href="https://github.com/verybigdog/fdk-aac-ios" target="_blank" rel="external">https://github.com/verybigdog/fdk-aac-ios</a><br> <a href="https://github.com/kewlbear/fdk-aac-build-script-for-iOS" target="_blank" rel="external">https://github.com/kewlbear/fdk-aac-build-script-for-iOS</a>:</p>
+<li><p>If you write a loop that creates many temporary objects.</p>
+<p>  You may use an autorelease pool block inside the loop to dispose of those objects before the next iteration. Using an autorelease pool block in the loop helps to reduce the maximum memory footprint of the application.</p>
 </li>
-<li><p>libRtmp: <a href="https://github.com/saiten/ios-librtmp" target="_blank" rel="external">https://github.com/saiten/ios-librtmp</a></p>
+<li><p>If you spawn a secondary thread.<br>You must create your own autorelease pool block as soon as the thread begins executing; otherwise, your application will leak objects</p>
 </li>
-<li>OpenSSL: <a href="https://github.com/x2on/OpenSSL-for-iPhone" target="_blank" rel="external">https://github.com/x2on/OpenSSL-for-iPhone</a></li>
+</ul>
+<h1 id="什么使用使用@autoreleasepool">什么使用使用@autoreleasepool</h1><ol>
+<li>写基于命令行的的程序时，就是没有UI框架，如AppKit等Cocoa框架时。(使用的较少)</li>
+<li><p>写循环，循环里面包含了大量临时创建的对象。（使用AudioQueue播放音频读取频繁数据的例子）</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">static void IJKSDLAudioQueueOuptutCallback(void * <span class="keyword">in</span>UserData, AudioQueueRef <span class="keyword">in</span>AQ, AudioQueueBufferRef <span class="keyword">in</span>Buffer) &#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        IJKSDLAudioQueueController* aqController = (__bridge IJKSDLAudioQueueController *) <span class="keyword">in</span>UserData;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (!aqController) &#123;</span><br><span class="line">            // <span class="keyword">do</span> nothing;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (aqController-&gt;_isPaused || aqController-&gt;_isStopped) &#123;</span><br><span class="line">            memset(<span class="keyword">in</span>Buffer-&gt;mAudioData, aqController.spec.silence, <span class="keyword">in</span>Buffer-&gt;mAudioDataByteSize);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            (*aqController.spec.callback)(aqController.spec.userdata, <span class="keyword">in</span>Buffer-&gt;mAudioData, <span class="keyword">in</span>Buffer-&gt;mAudioDataByteSize);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        AudioQueueEnqueueBuffer(<span class="keyword">in</span>AQ, <span class="keyword">in</span>Buffer, <span class="number">0</span>, NULL);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> <strong>写在@autpreleasepool 代码块中，让每次执行完成后可以及时的释放临时对象的内存</strong></p>
+</li>
+<li><p>创建了新的线程。（非Cocoa程序创建线程时才需要）</p>
+ <figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">static <span class="literal">void</span> *SDL_RunThread(<span class="literal">void</span> *<span class="built_in">data</span>)</span><br><span class="line">&#123;</span><br><span class="line">    @autoreleasepool &#123;</span><br><span class="line">        SDL_Thread *<span class="keyword">thread</span> = <span class="built_in">data</span>;</span><br><span class="line">        pthread_setname_np(<span class="keyword">thread</span><span class="subst">-&gt;</span>name);</span><br><span class="line">        <span class="keyword">thread</span><span class="subst">-&gt;</span>retval = <span class="keyword">thread</span><span class="subst">-&gt;</span>func(<span class="keyword">thread</span><span class="subst">-&gt;</span><span class="built_in">data</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="参考文档">参考文档</h1><ul>
+<li><a href="http://tutuge.me/2015/03/17/what-is-autoreleasepool/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">@autoreleasepool-内存的分配与释放</a></li>
 </ul>
 </span>
       
@@ -305,17 +317,13 @@ fdk-aac：
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/30/VideoToolBox-学习资料/" rel="next" title="VideoToolBox 学习资料">
-                <i class="fa fa-chevron-left"></i> VideoToolBox 学习资料
+              <a href="/2015/12/09/iOS播放器SDK版本更新日志/" rel="next" title="iOS播放器SDK版本更新日志">
+                <i class="fa fa-chevron-left"></i> iOS播放器SDK版本更新日志
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/01/Shell单引号和双引号的区别/" rel="prev" title="Shell单引号和双引号的区别">
-                Shell单引号和双引号的区别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -447,7 +455,7 @@ fdk-aac：
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Document"><span class="nav-number">1.</span> <span class="nav-text">Document</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#About_Autorelease_Pool_Blocks"><span class="nav-number">2.</span> <span class="nav-text">About Autorelease Pool Blocks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Using_Autorelease_Pool_Blocks"><span class="nav-number">3.</span> <span class="nav-text">Using Autorelease Pool Blocks</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么使用使用@autoreleasepool"><span class="nav-number">4.</span> <span class="nav-text">什么使用使用@autoreleasepool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文档"><span class="nav-number">5.</span> <span class="nav-text">参考文档</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
