@@ -54,7 +54,9 @@
 <meta name="description" content="Documenthttps://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html
 About Autorelease Pool Blocks
 代码块
- 1@autoreleasepool &amp;#123;&amp;#10;    // Code t">
+
+    @autoreleasepool {
+    // Code that cr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发中@autoreleasepool使用说明">
 <meta property="og:url" content="http://yoursite.com/2015/12/20/iOS开发中autoreleasepool使用说明/index.html">
@@ -62,14 +64,18 @@ About Autorelease Pool Blocks
 <meta property="og:description" content="Documenthttps://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html
 About Autorelease Pool Blocks
 代码块
- 1@autoreleasepool &amp;#123;&amp;#10;    // Code t">
-<meta property="og:updated_time" content="2015-12-20T10:25:28.000Z">
+
+    @autoreleasepool {
+    // Code that cr">
+<meta property="og:updated_time" content="2015-12-21T01:06:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发中@autoreleasepool使用说明">
 <meta name="twitter:description" content="Documenthttps://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html
 About Autorelease Pool Blocks
 代码块
- 1@autoreleasepool &amp;#123;&amp;#10;    // Code t">
+
+    @autoreleasepool {
+    // Code that cr">
 
 
 
@@ -271,19 +277,27 @@ About Autorelease Pool Blocks
       
         <span itemprop="articleBody"><h1 id="Document">Document</h1><p><a href="https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html" target="_blank" rel="external">https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmAutoreleasePools.html</a></p>
 <h1 id="About_Autorelease_Pool_Blocks">About Autorelease Pool Blocks</h1><ol>
-<li><p>代码块</p>
- <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10;    // Code that creates autoreleased objects.&#10;&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>代码块</li>
 </ol>
-<pre><code>**At the <span class="keyword">end</span> <span class="keyword">of</span> the autorelease pool <span class="keyword">block</span>, objects that received an autorelease message within the <span class="keyword">block</span> are sent a <span class="keyword">release</span> message—an object receives a <span class="keyword">release</span> message <span class="keyword">for</span> each <span class="typename">time</span> it was sent an autorelease message within the <span class="keyword">block</span>.**
+<pre><code>    @autoreleasepool {
+    <span class="comment">// Code that creates autoreleased objects.
+    }
 
-&gt; 在的autoreleasepool代码块执行结束的时候，自动释放池收到一条autorelease消息，池中的对象收到一条<span class="keyword">release</span>的消息。
+
+**At the end of the autorelease pool block, objects that received an autorelease message within the block are sent a release message—an object receives a release message for each time it was sent an autorelease message within the block.**
+
+
+&gt; 在的autoreleasepool代码块执行结束的时候，自动释放池收到一条autorelease消息，池中的对象收到一条release的消息。</span>
 </code></pre><ol>
-<li><p>autorelease的嵌套使用</p>
- <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;&#10;   // . . .&#10;  &#9;&#9; @autoreleasepool &#123;&#10;       &#9;// . . .&#10;   &#9;&#9;&#125;&#10;   . . .&#10;&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>autorelease的嵌套使用</li>
 </ol>
-<h1 id="Using_Autorelease_Pool_Blocks">Using Autorelease Pool Blocks</h1><p><em>There are, however, three occasions when you might use your own autorelease pool blocks:</em></p>
+<pre><code><span class="variable">@autoreleasepool</span> {
+<span class="comment">// . . .</span>
+    <span class="variable">@autoreleasepool</span> {
+    <span class="comment">// . . .</span>
+    }
+}
+</code></pre><h1 id="Using_Autorelease_Pool_Blocks">Using Autorelease Pool Blocks</h1><p><em>There are, however, three occasions when you might use your own autorelease pool blocks:</em></p>
 <ul>
 <li><p>If you are writing a program that is not based on a UI framework, such as a command-line tool.</p>
 </li>
@@ -324,6 +338,10 @@ About Autorelease Pool Blocks
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/21/pthread中函数的使用/" rel="prev" title="pthread中函数的使用">
+                pthread中函数的使用 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -391,7 +409,7 @@ About Autorelease Pool Blocks
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

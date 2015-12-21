@@ -51,19 +51,34 @@
 
 
 
-<meta name="description" content="###一、 单引号和双引号的区别
-定义一个变量12345678910localhost:~ zjc$ name = zjc-bash: name: command not foundlocalhost:~ zjc$ name =zjc-bash: name: command not foundlocalhost:~ zjc$ name= zjc-bash: zjc: command not fou">
+<meta name="description" content="##pthread函数的使用 
+#互斥锁
+在编程中，引入了对象互斥锁的概念，来保证共享数据操作的完整性。每个对象都对应于一个可称为” 互斥锁” 的标记，这个标记用来保证在任一时刻，只能有一个线程访问该对象。
+pthread_mutex_init该函数用于C函数的多线程编程中，互斥锁的初始化。
+
+pthread_mutex_init()函数是以动态方式创建互斥锁的。
+pthread_mutexatt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Shell单引号和双引号的区别">
-<meta property="og:url" content="http://yoursite.com/2015/12/01/Shell单引号和双引号的区别/index.html">
+<meta property="og:title" content="pthread中函数的使用">
+<meta property="og:url" content="http://yoursite.com/2015/12/21/pthread中函数的使用/index.html">
 <meta property="og:site_name" content="zjcdxzy">
-<meta property="og:description" content="###一、 单引号和双引号的区别
-定义一个变量12345678910localhost:~ zjc$ name = zjc-bash: name: command not foundlocalhost:~ zjc$ name =zjc-bash: name: command not foundlocalhost:~ zjc$ name= zjc-bash: zjc: command not fou">
-<meta property="og:updated_time" content="2015-12-14T02:16:11.000Z">
+<meta property="og:description" content="##pthread函数的使用 
+#互斥锁
+在编程中，引入了对象互斥锁的概念，来保证共享数据操作的完整性。每个对象都对应于一个可称为” 互斥锁” 的标记，这个标记用来保证在任一时刻，只能有一个线程访问该对象。
+pthread_mutex_init该函数用于C函数的多线程编程中，互斥锁的初始化。
+
+pthread_mutex_init()函数是以动态方式创建互斥锁的。
+pthread_mutexatt">
+<meta property="og:updated_time" content="2015-12-21T01:54:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shell单引号和双引号的区别">
-<meta name="twitter:description" content="###一、 单引号和双引号的区别
-定义一个变量12345678910localhost:~ zjc$ name = zjc-bash: name: command not foundlocalhost:~ zjc$ name =zjc-bash: name: command not foundlocalhost:~ zjc$ name= zjc-bash: zjc: command not fou">
+<meta name="twitter:title" content="pthread中函数的使用">
+<meta name="twitter:description" content="##pthread函数的使用 
+#互斥锁
+在编程中，引入了对象互斥锁的概念，来保证共享数据操作的完整性。每个对象都对应于一个可称为” 互斥锁” 的标记，这个标记用来保证在任一时刻，只能有一个线程访问该对象。
+pthread_mutex_init该函数用于C函数的多线程编程中，互斥锁的初始化。
+
+pthread_mutex_init()函数是以动态方式创建互斥锁的。
+pthread_mutexatt">
 
 
 
@@ -75,7 +90,7 @@
   };
 </script>
 
-  <title> Shell单引号和双引号的区别 | zjcdxzy </title>
+  <title> pthread中函数的使用 | zjcdxzy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -215,7 +230,7 @@
             
             
               
-                Shell单引号和双引号的区别
+                pthread中函数的使用
               
             
           </h1>
@@ -224,8 +239,8 @@
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-01T18:46:36+08:00" content="2015-12-01">
-              2015-12-01
+            <time itemprop="dateCreated" datetime="2015-12-21T09:52:50+08:00" content="2015-12-21">
+              2015-12-21
             </time>
           </span>
 
@@ -234,8 +249,8 @@
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -263,19 +278,36 @@
       
 
       
-        <span itemprop="articleBody"><p>###一、 单引号和双引号的区别</p>
-<h4 id="定义一个变量">定义一个变量</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ zjc$ name = zjc</span><br><span class="line">-bash: name: <span class="built_in">command</span> not found</span><br><span class="line">localhost:~ zjc$ name =zjc</span><br><span class="line">-bash: name: <span class="built_in">command</span> not found</span><br><span class="line">localhost:~ zjc$ name= zjc</span><br><span class="line">-bash: zjc: <span class="built_in">command</span> not found</span><br><span class="line">localhost:~ zjc$ name=zjc</span><br><span class="line">localhost:~ zjc$ <span class="built_in">echo</span> <span class="variable">$name</span></span><br><span class="line">zjc</span><br><span class="line">localhost:~ zjc$</span><br></pre></td></tr></table></figure>
+        <span itemprop="articleBody"><p>##pthread函数的使用 </p>
+<p>#互斥锁</p>
+<p>在编程中，引入了对象互斥锁的概念，来保证共享数据操作的完整性。每个对象都对应于一个可称为” 互斥锁” 的标记，<strong>这个标记用来保证在任一时刻，只能有一个线程访问该对象</strong>。</p>
+<h2 id="pthread_mutex_init">pthread_mutex_init</h2><p>该函数用于C函数的多线程编程中，互斥锁的初始化。</p>
 <ul>
-<li><p>shell 基本语法，等号两侧不能有空格.</p>
-</li>
-<li><p>使用$符号可以访问变量。</p>
-</li>
+<li>pthread_mutex_init()函数是以动态方式创建互斥锁的。</li>
+<li>pthread_mutexattr_init()函数成功完成之后会返回零，其他任何返回值都表示出现了错误。</li>
+<li>函数成功执行后，互斥锁被初始化为未锁住态。    </li>
 </ul>
-<h4 id="引号的引用">引号的引用</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ zjc$ name=zjc</span><br><span class="line">localhost:~ zjc$ <span class="built_in">echo</span> <span class="variable">$name</span></span><br><span class="line">zjc</span><br><span class="line">localhost:~ zjc$ sayhello=<span class="string">"Hello <span class="variable">$name</span>"</span></span><br><span class="line">localhost:~ zjc$ <span class="built_in">echo</span> <span class="variable">$sayhello</span></span><br><span class="line">Hello zjc</span><br><span class="line">localhost:~ zjc$ sayhello=<span class="string">'Hello $name'</span></span><br><span class="line">localhost:~ zjc$ <span class="built_in">echo</span> <span class="variable">$sayhello</span></span><br><span class="line">Hello <span class="variable">$name</span></span><br><span class="line">localhost:~ zjc$</span><br></pre></td></tr></table></figure>
+<h2 id="pthread_mutex_lock">pthread_mutex_lock</h2><p>pthread_mutex_lock() 返回时，改互斥锁已经别锁定。线程调用该函数让互斥锁上锁，如果该互斥锁已经被另一个线程锁定和拥有，则调用线程将阻塞，直到该互斥锁变为可用为止。</p>
+<h2 id="pthread_mutex_unlock">pthread_mutex_unlock</h2><p>与pthread_mutex_lock成对存在。释放互斥锁</p>
+<h2 id="pthread_mutex_destroy">pthread_mutex_destroy</h2><p>互斥锁销毁函数在执行成功后返回 0，否则返回错误码。</p>
+<h1 id="条件变量">条件变量</h1><p>Linux下C编程的条件变量：</p>
 <ul>
-<li>获取变量值的时候使用双引号””。</li>
-<li>单引号和双引号的最大的不同在于双引号仍然可以保有变量的内容，但是单引号时能是一般的字符，不能是特殊的符号。</li>
+<li>条件变量是线程中的东西，就是等待某一条件的发生，和信号一样。</li>
+<li>条件变量使我们可以睡眠等待某种条件出现。</li>
+<li>条件变量是利用线程间共享的全局变量进行同步的一种机制，主要包括两个动作：一个线程等待”条件变量的条件成立”而挂起；另一个线程使”条件成立”（给出条件成立信号）。<strong>为了防止竞争，条件变量的使用总是和一个互斥锁结合在一起。</strong></li>
 </ul>
+<h2 id="pthread_cond_init">pthread_cond_init</h2><p>函数pthread_cond_init（）被用来初始化一个条件变量。</p>
+<ul>
+<li>默认条件变量被同一进程内的各个线程使用。</li>
+<li>初始化条件变量只有未被使用时才能重新初始化或被释放。 </li>
+<li>函数成功返回0；任何其他返回值都表示错误。</li>
+</ul>
+<h2 id="pthread_cond_wait">pthread_cond_wait</h2><p>等待条件有两种方式：条件等待pthread_cond_wait()和计时等待pthread_cond_timedwait()，其中计时等待方式如果在给定时刻前条件没有满足，则返回ETIMEOUT，结束等待.</p>
+<p>无论哪种等待方式，都必须和一个互斥锁配合，以防止多个线程同时请求pthread_cond_wait()的竞争条件。在调用pthread_cond_wait()前必须由本线程加锁（pthread_mutex_lock()），mutex保持锁定状态，在线程挂起进入等待前解锁。</p>
+<p><strong>pthread_cond_wait必须放在pthread_mutex_lock和pthread_mutex_unlock之间，因为他要根据共享变量的状态来决定是否要等待，而为了不永远等待下去所以必须要在lock/unlock队中</strong></p>
+<h2 id="pthread_cond_signal">pthread_cond_signal</h2><p>pthread_cond_signal函数的作用是发送一个信号给另外一个正在处于阻塞等待状态的线程,使其脱离阻塞状态,继续执行.如果没有线程处在阻塞等待状态,pthread_cond_signal也会成功返回。</p>
+<p><strong>thread_cond_signal建议放在pthread_mutex_lock和pthread_mutex_unlock之间</strong></p>
+<h2 id="pthread_cond_destroy">pthread_cond_destroy</h2><p>注销一个条件变量需要调用pthread_cond_destroy()，只有在没有线程在该条件变量上等待的时候，才能注销这个条件变量，否则返回失败</p>
 </span>
       
     </div>
@@ -287,17 +319,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/30/FFMpeg-资源文件整理/" rel="next" title="FFMpeg 资源文件整理">
-                <i class="fa fa-chevron-left"></i> FFMpeg 资源文件整理
+              <a href="/2015/12/20/iOS开发中autoreleasepool使用说明/" rel="next" title="iOS开发中@autoreleasepool使用说明">
+                <i class="fa fa-chevron-left"></i> iOS开发中@autoreleasepool使用说明
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/01/shell中$后面使用的字符之间的区别/" rel="prev" title="shell中$后面使用的字符之间的区别">
-                shell中$后面使用的字符之间的区别 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -429,7 +457,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#定义一个变量"><span class="nav-number">1.</span> <span class="nav-text">定义一个变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#引号的引用"><span class="nav-number">2.</span> <span class="nav-text">引号的引用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_mutex_init"><span class="nav-number">1.</span> <span class="nav-text">pthread_mutex_init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_mutex_lock"><span class="nav-number">2.</span> <span class="nav-text">pthread_mutex_lock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_mutex_unlock"><span class="nav-number">3.</span> <span class="nav-text">pthread_mutex_unlock</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_mutex_destroy"><span class="nav-number">4.</span> <span class="nav-text">pthread_mutex_destroy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#条件变量"><span class="nav-number"></span> <span class="nav-text">条件变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_cond_init"><span class="nav-number">1.</span> <span class="nav-text">pthread_cond_init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_cond_wait"><span class="nav-number">2.</span> <span class="nav-text">pthread_cond_wait</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_cond_signal"><span class="nav-number">3.</span> <span class="nav-text">pthread_cond_signal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pthread_cond_destroy"><span class="nav-number">4.</span> <span class="nav-text">pthread_cond_destroy</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
