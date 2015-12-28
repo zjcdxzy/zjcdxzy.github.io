@@ -1,0 +1,838 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="AudioFileStream介绍
+AudioFileStreamer是用来读取采样率、码率、时长等基本信息以及分离音频帧。
+AudioFileStreamer用在流播放中，当然不仅限于网络流，本地文件同样可以用它来读取信息和分离音频帧。
+AudioFileStreamer的主要数据是文件数据，支持的文件格式有：
+
+MPEG-1 Audio Layer 3, used for .mp3 files">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AudioFileStream学习">
+<meta property="og:url" content="http://yoursite.com/2015/12/28/AudioFileStream学习/index.html">
+<meta property="og:site_name" content="zjcdxzy">
+<meta property="og:description" content="AudioFileStream介绍
+AudioFileStreamer是用来读取采样率、码率、时长等基本信息以及分离音频帧。
+AudioFileStreamer用在流播放中，当然不仅限于网络流，本地文件同样可以用它来读取信息和分离音频帧。
+AudioFileStreamer的主要数据是文件数据，支持的文件格式有：
+
+MPEG-1 Audio Layer 3, used for .mp3 files">
+<meta property="og:updated_time" content="2015-12-28T08:58:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AudioFileStream学习">
+<meta name="twitter:description" content="AudioFileStream介绍
+AudioFileStreamer是用来读取采样率、码率、时长等基本信息以及分离音频帧。
+AudioFileStreamer用在流播放中，当然不仅限于网络流，本地文件同样可以用它来读取信息和分离音频帧。
+AudioFileStreamer的主要数据是文件数据，支持的文件格式有：
+
+MPEG-1 Audio Layer 3, used for .mp3 files">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> AudioFileStream学习 | zjcdxzy </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">zjcdxzy</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">专注写作30年</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                AudioFileStream学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-28T15:09:28+08:00" content="2015-12-28">
+              2015-12-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/音视频开发/" itemprop="url" rel="index">
+                    <span itemprop="name">音视频开发</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="AudioFileStream介绍">AudioFileStream介绍</h2><ul>
+<li>AudioFileStreamer是用来读取采样率、码率、时长等基本信息以及分离音频帧。</li>
+<li>AudioFileStreamer用在流播放中，当然不仅限于网络流，本地文件同样可以用它来读取信息和分离音频帧。</li>
+<li><p>AudioFileStreamer的主要数据是文件数据，支持的文件格式有：</p>
+<ul>
+<li>MPEG-1 Audio Layer 3, used for .mp3 files</li>
+<li>MPEG-2 ADTS, used for the .aac audio data format</li>
+<li>AIFC</li>
+<li>AIFF</li>
+<li>CAF</li>
+<li>MPEG-4, used for .m4a, .mp4, and .3gp files</li>
+<li>NeXT</li>
+<li>WAVE</li>
+</ul>
+</li>
+</ul>
+<h2 id="AudioFileStreamOpen">AudioFileStreamOpen</h2><p>初始化AudioFileStream，创建一个音频流解析器，生成一个AudioFileStream示例。</p>
+<h3 id="函数示例">函数示例</h3><pre><code>extern OSStatus    
+AudioFileStreamOpen <span class="list">(
+                            <span class="keyword">void</span> <span class="variable">* __nullable                        inClientData,
+                            AudioFileStream_PropertyListenerProc    inPropertyListenerProc,
+                            AudioFileStream_PacketsProc                inPacketsProc,
+                            AudioFileTypeID                            inFileTypeHint,
+                            AudioFileStreamID __nullable *</span> __nonnull outAudioFileStream)</span>
+                                                                        __OSX_AVAILABLE_STARTING<span class="list">(<span class="keyword">__MAC_10_5</span>,__IPHONE_2_0)</span><span class="comment">;</span>
+</code></pre><h3 id="参数列表：">参数列表：</h3><ul>
+<li>inClientData 上下文对象</li>
+<li>AudioFileStream_PropertyListenerProc 歌曲信息解析的回调，每次解析出一个歌曲信息，都会执行一次回调。</li>
+<li>AudioFileStream_PacketsProc 分离帧的回调，每解析出一部分帧就会进行一次回调</li>
+<li><p>AudioFileTypeID 是文件类型的提示，创建指定文件格式的音频流解析器。AudioFileTypeID对应的枚举</p>
+<pre><code><span class="class"><span class="keyword">enum</span> {</span> 
+    kAudioFileAIFFType             = <span class="string">'AIFF'</span>, 
+    kAudioFileAIFCType             = <span class="string">'AIFC'</span>, 
+    kAudioFileWAVEType             = <span class="string">'WAVE'</span>, 
+    kAudioFileSoundDesigner2Type   = <span class="string">'Sd2f'</span>, 
+    kAudioFileNextType             = <span class="string">'NeXT'</span>, 
+    kAudioFileMP3Type              = <span class="string">'MPG3'</span>,    <span class="comment">// mpeg layer 3 </span>
+    kAudioFileMP2Type              = <span class="string">'MPG2'</span>,    <span class="comment">// mpeg layer 2 </span>
+    kAudioFileMP1Type              = <span class="string">'MPG1'</span>,    <span class="comment">// mpeg layer 1 </span>
+    kAudioFileAC3Type              = <span class="string">'ac-3'</span>, 
+    kAudioFileAAC_ADTSType         = <span class="string">'adts'</span>, 
+    kAudioFileMPEG4Type            = <span class="string">'mp4f'</span>, 
+    kAudioFileM4AType              = <span class="string">'m4af'</span>, 
+    kAudioFileM4BType              = <span class="string">'m4bf'</span>, 
+    kAudioFileCAFType              = <span class="string">'caff'</span>, 
+    kAudioFile3GPType              = <span class="string">'3gpp'</span>, 
+    kAudioFile3GP2Type             = <span class="string">'3gp2'</span>,         
+    kAudioFileAMRType              = <span class="string">'amrf'</span>         
+}; 
+</code></pre></li>
+<li>outAudioFileStream AudioFileStream实例对应的AudioFileStreamID，AudioFileStream其他函数需要使用。</li>
+</ul>
+<h3 id="返回值">返回值</h3><p>返回值用来判断是否成功初始化（OSSStatus == noErr）</p>
+<h2 id="AudioFileStreamParseBytes">AudioFileStreamParseBytes</h2><p>解析数据，在初始化完成之后，调用该方法解析文件数据。</p>
+<h3 id="函数示例-1">函数示例</h3><pre><code><span class="keyword">extern</span> OSStatus AudioFileStreamParseBytes(AudioFileStreamID inAudioFileStream, 
+                                          <span class="built_in">UInt32</span> inDataByteSize, 
+                                          <span class="keyword">const</span> <span class="keyword">void</span>* inData, 
+                                          <span class="built_in">UInt32</span> inFlags); 
+</code></pre><h3 id="参数列表">参数列表</h3><ul>
+<li>inAudioFileStream 初始化成功后返回的 AudioFileStreamID</li>
+<li>inDataByteSize     本次解析的文件长度</li>
+<li>inData                本次解析的数据</li>
+<li>inFlags 标志位，标识本次的解析和上一次解析是否是连续的关系，默认0表示连续，否则传入kAudioFileStreamParseFlag_Discontinuity。</li>
+</ul>
+<h3 id="返回值-1">返回值</h3><p>OSStatus的值不是noErr则表示解析不成功，对应的错误码：</p>
+<pre><code><span class="class"><span class="keyword">enum</span> 
+{</span> 
+  kAudioFileStreamError_UnsupportedFileType        = <span class="string">'typ?'</span>, 
+  kAudioFileStreamError_UnsupportedDataFormat      = <span class="string">'fmt?'</span>, 
+  kAudioFileStreamError_UnsupportedProperty        = <span class="string">'pty?'</span>, 
+  kAudioFileStreamError_BadPropertySize            = <span class="string">'!siz'</span>, 
+  kAudioFileStreamError_NotOptimized               = <span class="string">'optm'</span>, 
+  kAudioFileStreamError_InvalidPacketOffset        = <span class="string">'pck?'</span>, 
+  kAudioFileStreamError_InvalidFile                = <span class="string">'dta?'</span>, 
+  kAudioFileStreamError_ValueUnknown               = <span class="string">'unk?'</span>, 
+  kAudioFileStreamError_DataUnavailable            = <span class="string">'more'</span>, 
+  kAudioFileStreamError_IllegalOperation           = <span class="string">'nope'</span>, 
+  kAudioFileStreamError_UnspecifiedError           = <span class="string">'wht?'</span>, 
+  kAudioFileStreamError_DiscontinuityCantRecover   = <span class="string">'dsc!'</span> 
+}; 
+</code></pre><p>每次调用成功后应该注意返回值，一旦出现错误就不必要进行后续的解析。</p>
+<h2 id="AudioFileStream_PropertyListenerProc">AudioFileStream_PropertyListenerProc</h2><p>解析文件格式信息的回调，在调用AudioFileStreamParseBytes方法进行解析时会首先读取格式信息，并同步的进入AudioFileStream_PropertyListenerProc回调方法。</p>
+<h3 id="函数示例-2">函数示例</h3><pre><code>typedef void <span class="list">(<span class="keyword">*AudioFileStream_PropertyListenerProc</span>)</span><span class="list">(
+                                            <span class="keyword">void</span> <span class="variable">*                            inClientData,
+                                            AudioFileStreamID                inAudioFileStream,
+                                            AudioFileStreamPropertyID        inPropertyID,
+                                            AudioFileStreamPropertyFlags *</span>    ioFlags)</span><span class="comment">;</span>
+</code></pre><h3 id="参数列表-1">参数列表</h3><ul>
+<li><strong>inClientData</strong> 得到上下文</li>
+<li><strong>inAudioFileStream</strong> 表示当前的FileStream的AudioFileStreamID</li>
+<li><p><strong>inPropertyID</strong> 表示此次回调解析的AudioFileStreamPropertyID，</p>
+<ul>
+<li><p>支持的AudioFileStreamPropertyID枚举： </p>
+<pre><code><span class="class"><span class="keyword">enum</span> 
+{</span> 
+  kAudioFileStreamProperty_ReadyToProducePackets           =    <span class="string">'redy'</span>, 
+  kAudioFileStreamProperty_FileFormat                      =    <span class="string">'ffmt'</span>, 
+  kAudioFileStreamProperty_DataFormat                      =    <span class="string">'dfmt'</span>, 
+  kAudioFileStreamProperty_FormatList                      =    <span class="string">'flst'</span>, 
+  kAudioFileStreamProperty_MagicCookieData                 =    <span class="string">'mgic'</span>, 
+  kAudioFileStreamProperty_AudioDataByteCount              =    <span class="string">'bcnt'</span>, 
+  kAudioFileStreamProperty_AudioDataPacketCount            =    <span class="string">'pcnt'</span>, 
+  kAudioFileStreamProperty_MaximumPacketSize               =    <span class="string">'psze'</span>, 
+  kAudioFileStreamProperty_DataOffset                      =    <span class="string">'doff'</span>, 
+  kAudioFileStreamProperty_ChannelLayout                   =    <span class="string">'cmap'</span>, 
+  kAudioFileStreamProperty_PacketToFrame                   =    <span class="string">'pkfr'</span>, 
+  kAudioFileStreamProperty_FrameToPacket                   =    <span class="string">'frpk'</span>, 
+  kAudioFileStreamProperty_PacketToByte                    =    <span class="string">'pkby'</span>, 
+  kAudioFileStreamProperty_ByteToPacket                    =    <span class="string">'bypk'</span>, 
+  kAudioFileStreamProperty_PacketTableInfo                 =    <span class="string">'pnfo'</span>, 
+  kAudioFileStreamProperty_PacketSizeUpperBound            =    <span class="string">'pkub'</span>, 
+  kAudioFileStreamProperty_AverageBytesPerPacket           =    <span class="string">'abpp'</span>, 
+  kAudioFileStreamProperty_BitRate                         =    <span class="string">'brat'</span>, 
+  kAudioFileStreamProperty_InfoDictionary                  =    <span class="string">'info'</span> 
+}; 
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<pre><code>- 当前PropertyID对应的信息已经解析完成信息，可以通过AudioFileStreamGetProperty接口获取PropertyID对应的值或者数据结构；
+
+        <span class="function"><span class="keyword">extern</span> OSStatus <span class="title">AudioFileStreamGetProperty</span><span class="params">(AudioFileStreamID inAudioFileStream, 
+                                           AudioFileStreamPropertyID inPropertyID, 
+                                           UInt32 * ioPropertyDataSize, 
+                                           <span class="keyword">void</span> * outPropertyData)</span></span>; 
+</code></pre><ul>
+<li>ioFlags 表示这个property是否需要被缓存。</li>
+</ul>
+<h3 id="AudioFileStreamPropertyID解析">AudioFileStreamPropertyID解析</h3><ul>
+<li><strong>kAudioFileStreamProperty_BitRate</strong> 音频数据的码率，通过码率可以计算音视频的总时长 </li>
+<li><p><strong>kAudioFileStreamProperty_DataOffset</strong> 表示音频数据在整个音频文件中的offset </p>
+<p>  <em>因为大多数音频文件都会有一个文件头之后才使真正的音频数据），这个值在seek时会发挥比较大的作用，音频的seek并不是直接seek文件位置而seek时间（比如seek到2分10秒的位置），seek时会根据时间计算出音频数据的字节offset然后需要再加上音频数据的offset才能得到在文件中的真正offset</em></p>
+</li>
+<li><strong>kAudioFileStreamProperty_DataFormat</strong> 表示音频文件结构信息，是一个AudioStreamBasicDescription的结构</li>
+<li><strong>kAudioFileStreamProperty_FormatList</strong> 作用和kAudioFileStreamProperty_DataFormat是一样的，区别在于用这个PropertyID获取到是一个AudioStreamBasicDescription的数组</li>
+<li><strong>kAudioFileStreamProperty_AudioDataByteCount</strong> 音频文件中音频数据的总量。这个Property的作用一是用来计算音频的总时长，二是可以在seek时用来计算时间对应的字节offset    </li>
+<li><strong>kAudioFileStreamProperty_ReadyToProducePackets</strong> 一旦回调中这个PropertyID出现就代表解析完成，接下来可以对音频数据进行帧分离了</li>
+</ul>
+<h3 id="计算时长Duration">计算时长Duration</h3><p> <code>double duration = (audioDataByteCount * 8) / bitRate</code></p>
+<p> 音频数据的字节总量audioDataByteCount可以通过kAudioFileStreamProperty_AudioDataByteCount获取,<br> 码率bitRate可以通过kAudioFileStreamProperty_BitRate获取</p>
+<h2 id="AudioFileStream_PacketsProc">AudioFileStream_PacketsProc</h2><p>分离音频帧回调，读取格式信息完成之后，继续调用AudioFileStreamParseBytes方法可以对帧进行分离，并同步的进入AudioFileStream_PacketsProc回调方法</p>
+<h3 id="函数示例-3">函数示例</h3><pre><code><span class="keyword">typedef</span> <span class="keyword">void</span> (*AudioFileStream_PacketsProc)(
+                                            <span class="keyword">void</span> *                            inClientData,
+                                            <span class="built_in">UInt32</span>                            inNumberBytes,
+                                            <span class="built_in">UInt32</span>                            inNumberPackets,
+                                            <span class="keyword">const</span> <span class="keyword">void</span> *                    inInputData,
+                                            AudioStreamPacketDescription    *inPacketDescriptions);
+</code></pre><h3 id="参数列表-2">参数列表</h3><ul>
+<li><strong>inClientData</strong> 得到上下文</li>
+<li><strong>inNumberBytes</strong> 表示本次处理的数据大小</li>
+<li><strong>inNumberPackets</strong> 本次总共处理了多少帧AudioFileStreamPropertyID </li>
+<li>inInputData 本次处理的所有数据</li>
+<li>AudioStreamPacketDescription AudioStreamPacketDescription数组，存储了每一帧数据是从第几个字节开始的，这一帧总共多少字节。</li>
+</ul>
+<h2 id="AudioFileStreamSeek">AudioFileStreamSeek</h2><p>seek操作</p>
+<h2 id="AudioFileStreamClose">AudioFileStreamClose</h2><p>AudioFileStream使用完毕后需要调用AudioFileStreamClose进行关闭</p>
+<h3 id="函数示例-4">函数示例</h3><pre><code><span class="function"><span class="keyword">extern</span> OSStatus <span class="title">AudioFileStreamClose</span><span class="params">(AudioFileStreamID inAudioFileStream)</span></span>;  
+</code></pre><p>参数：inAudioFileStream    初始化时生成的AudioFileStreamID</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://developer.apple.com/library/ios/documentation/AudioVideo/Conceptual/MultimediaPG/UsingAudio/UsingAudio.html#//apple_ref/doc/uid/TP40009767-CH2-SW28" target="_blank" rel="external">Using Audio</a></li>
+<li><a href="http://www.cocoachina.com/industry/20140721/9196.html" target="_blank" rel="external">AudioFileStream</a></li>
+</ol>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/28/iOS音频开发学习/" rel="next" title="iOS音频开发学习">
+                <i class="fa fa-chevron-left"></i> iOS音频开发学习
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="http://7xosar.com1.z0.glb.clouddn.com/avatar.jpg" alt="zjcdxzy" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zjcdxzy</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">爱生活，爱自己</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="http://github.com/zjcdxzy" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/5018ad3b272f/latest_articles" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> 简书
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioFileStream介绍"><span class="nav-number">1.</span> <span class="nav-text">AudioFileStream介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioFileStreamOpen"><span class="nav-number">2.</span> <span class="nav-text">AudioFileStreamOpen</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数示例"><span class="nav-number">2.1.</span> <span class="nav-text">函数示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数列表："><span class="nav-number">2.2.</span> <span class="nav-text">参数列表：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值"><span class="nav-number">2.3.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioFileStreamParseBytes"><span class="nav-number">3.</span> <span class="nav-text">AudioFileStreamParseBytes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数示例-1"><span class="nav-number">3.1.</span> <span class="nav-text">函数示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数列表"><span class="nav-number">3.2.</span> <span class="nav-text">参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#返回值-1"><span class="nav-number">3.3.</span> <span class="nav-text">返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioFileStream_PropertyListenerProc"><span class="nav-number">4.</span> <span class="nav-text">AudioFileStream_PropertyListenerProc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数示例-2"><span class="nav-number">4.1.</span> <span class="nav-text">函数示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数列表-1"><span class="nav-number">4.2.</span> <span class="nav-text">参数列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AudioFileStreamPropertyID解析"><span class="nav-number">4.3.</span> <span class="nav-text">AudioFileStreamPropertyID解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算时长Duration"><span class="nav-number">4.4.</span> <span class="nav-text">计算时长Duration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioFileStream_PacketsProc"><span class="nav-number">5.</span> <span class="nav-text">AudioFileStream_PacketsProc</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数示例-3"><span class="nav-number">5.1.</span> <span class="nav-text">函数示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数列表-2"><span class="nav-number">5.2.</span> <span class="nav-text">参数列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioFileStreamSeek"><span class="nav-number">6.</span> <span class="nav-text">AudioFileStreamSeek</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AudioFileStreamClose"><span class="nav-number">7.</span> <span class="nav-text">AudioFileStreamClose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数示例-4"><span class="nav-number">7.1.</span> <span class="nav-text">函数示例</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zjcdxzy</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
