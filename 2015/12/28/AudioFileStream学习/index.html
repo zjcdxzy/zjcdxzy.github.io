@@ -67,7 +67,7 @@ AudioFileStreamer用在流播放中，当然不仅限于网络流，本地文件
 AudioFileStreamer的主要数据是文件数据，支持的文件格式有：
 
 MPEG-1 Audio Layer 3, used for .mp3 files">
-<meta property="og:updated_time" content="2015-12-28T09:09:02.000Z">
+<meta property="og:updated_time" content="2015-12-28T09:12:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="AudioFileStream学习">
 <meta name="twitter:description" content="AudioFileStream介绍
@@ -391,10 +391,6 @@ AudioFileStreamOpen <span class="list">(
   kAudioFileStreamProperty_InfoDictionary                  =    <span class="string">'info'</span> 
 }; 
 </code></pre></li>
-</ul>
-</li>
-</ul>
-<ul>
 <li><p>当前PropertyID对应的信息已经解析完成信息，可以通过AudioFileStreamGetProperty接口获取PropertyID对应的值或者数据结构；</p>
 <pre><code><span class="function"><span class="keyword">extern</span> OSStatus <span class="title">AudioFileStreamGetProperty</span><span class="params">(AudioFileStreamID inAudioFileStream, 
                                    AudioFileStreamPropertyID inPropertyID, 
@@ -402,8 +398,9 @@ AudioFileStreamOpen <span class="list">(
                                    <span class="keyword">void</span> * outPropertyData)</span></span>; 
 </code></pre></li>
 </ul>
-<ul>
-<li>ioFlags 表示这个property是否需要被缓存。</li>
+</li>
+<li><p>ioFlags 表示这个property是否需要被缓存。</p>
+</li>
 </ul>
 <h3 id="AudioFileStreamPropertyID解析">AudioFileStreamPropertyID解析</h3><ul>
 <li><strong>kAudioFileStreamProperty_BitRate</strong> 音频数据的码率，通过码率可以计算音视频的总时长 </li>
