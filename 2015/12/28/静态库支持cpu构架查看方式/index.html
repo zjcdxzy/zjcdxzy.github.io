@@ -51,29 +51,22 @@
 
 
 
-<meta name="description" content="Architectures
-Build Active Architecture Only
-
-设置为NO的时候，会编译支持的所有的版本
-设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本">
+<meta name="description" content="使用lipo -info 命令localhost:leCloudPlayerSDK zjc$ lipo -info libLeClouldLivingPlayer.a 
+Architectures in the fat file: libLeClouldLivingPlayer.a are: armv7 i386 x86_64 arm64 
+使用file命令localhost:leCloudPla">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BuildActiveArchitectureOnly">
-<meta property="og:url" content="http://yoursite.com/2015/12/04/BuildActiveArchitectureOnly/index.html">
+<meta property="og:title" content="静态库支持cpu构架查看方式">
+<meta property="og:url" content="http://yoursite.com/2015/12/28/静态库支持cpu构架查看方式/index.html">
 <meta property="og:site_name" content="zjcdxzy">
-<meta property="og:description" content="Architectures
-Build Active Architecture Only
-
-设置为NO的时候，会编译支持的所有的版本
-设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本">
-<meta property="og:image" content="http://7xosar.com1.z0.glb.clouddn.com/architectures.png">
-<meta property="og:updated_time" content="2015-12-14T02:16:11.000Z">
+<meta property="og:description" content="使用lipo -info 命令localhost:leCloudPlayerSDK zjc$ lipo -info libLeClouldLivingPlayer.a 
+Architectures in the fat file: libLeClouldLivingPlayer.a are: armv7 i386 x86_64 arm64 
+使用file命令localhost:leCloudPla">
+<meta property="og:updated_time" content="2015-12-28T02:05:07.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BuildActiveArchitectureOnly">
-<meta name="twitter:description" content="Architectures
-Build Active Architecture Only
-
-设置为NO的时候，会编译支持的所有的版本
-设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本">
+<meta name="twitter:title" content="静态库支持cpu构架查看方式">
+<meta name="twitter:description" content="使用lipo -info 命令localhost:leCloudPlayerSDK zjc$ lipo -info libLeClouldLivingPlayer.a 
+Architectures in the fat file: libLeClouldLivingPlayer.a are: armv7 i386 x86_64 arm64 
+使用file命令localhost:leCloudPla">
 
 
 
@@ -85,7 +78,7 @@ Build Active Architecture Only
   };
 </script>
 
-  <title> BuildActiveArchitectureOnly | zjcdxzy </title>
+  <title> 静态库支持cpu构架查看方式 | zjcdxzy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -225,7 +218,7 @@ Build Active Architecture Only
             
             
               
-                BuildActiveArchitectureOnly
+                静态库支持cpu构架查看方式
               
             
           </h1>
@@ -234,8 +227,8 @@ Build Active Architecture Only
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-04T16:08:26+08:00" content="2015-12-04">
-              2015-12-04
+            <time itemprop="dateCreated" datetime="2015-12-28T10:04:44+08:00" content="2015-12-28">
+              2015-12-28
             </time>
           </span>
 
@@ -273,13 +266,15 @@ Build Active Architecture Only
       
 
       
-        <span itemprop="articleBody"><h4 id="Architectures">Architectures</h4><p><img src="http://7xosar.com1.z0.glb.clouddn.com/architectures.png" alt="Architectures"></p>
-<p><em>Build Active Architecture Only</em></p>
-<ol>
-<li>设置为NO的时候，会编译支持的所有的版本</li>
-<li>设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本</li>
-</ol>
-</span>
+        <span itemprop="articleBody"><h2 id="使用lipo_-info_命令">使用lipo -info 命令</h2><pre><code>localhost:leCloudPlayerSDK zjc$ lipo -info libLeClouldLivingPlayer.<span class="operator">a</span> 
+Architectures <span class="operator">in</span> <span class="operator">the</span> fat <span class="built_in">file</span>: libLeClouldLivingPlayer.<span class="operator">a</span> are: armv7 i386 x86_64 arm64 
+</code></pre><h2 id="使用file命令">使用file命令</h2><pre><code>localhost:leCloudPlayerSDK zjc$ <span class="built_in">file</span> libLeClouldLivingPlayer.<span class="operator">a</span> 
+libLeClouldLivingPlayer.<span class="operator">a</span>: Mach-O universal binary <span class="operator">with</span> <span class="number">4</span> architectures
+libLeClouldLivingPlayer.<span class="operator">a</span> (<span class="keyword">for</span> architecture armv7):    current ar archive <span class="built_in">random</span> library
+libLeClouldLivingPlayer.<span class="operator">a</span> (<span class="keyword">for</span> architecture i386):    current ar archive <span class="built_in">random</span> library
+libLeClouldLivingPlayer.<span class="operator">a</span> (<span class="keyword">for</span> architecture x86_64):    current ar archive <span class="built_in">random</span> library
+libLeClouldLivingPlayer.<span class="operator">a</span> (<span class="keyword">for</span> architecture arm64):    current ar archive <span class="built_in">random</span> library
+</code></pre></span>
       
     </div>
 
@@ -290,17 +285,13 @@ Build Active Architecture Only
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/04/工程模块化/" rel="next" title="工程模块化">
-                <i class="fa fa-chevron-left"></i> 工程模块化
+              <a href="/2015/12/26/iOS应用程序在后台保持运行实现方式/" rel="next" title="iOS应用程序在后台保持运行实现方式">
+                <i class="fa fa-chevron-left"></i> iOS应用程序在后台保持运行实现方式
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/09/iOS播放器SDK版本更新日志/" rel="prev" title="iOS播放器SDK版本更新日志">
-                iOS播放器SDK版本更新日志 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -432,7 +423,7 @@ Build Active Architecture Only
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Architectures"><span class="nav-number">1.</span> <span class="nav-text">Architectures</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用lipo_-info_命令"><span class="nav-number">1.</span> <span class="nav-text">使用lipo -info 命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用file命令"><span class="nav-number">2.</span> <span class="nav-text">使用file命令</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -51,29 +51,40 @@
 
 
 
-<meta name="description" content="Architectures
-Build Active Architecture Only
+<meta name="description" content="在iOS系统上应用程序在后台如何长时间运行
+播放音乐
+声明Audio
+获取GPS信号
 
-设置为NO的时候，会编译支持的所有的版本
-设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本">
+iOS 长时间后台的两种方法iOS开启后台任务后只有600s的执行时间， 大约10分钟，现在需要实现在后台保持下载，或者需要在应用进入后台时仍然和服务器保持连接。
+后台播放一个静音的音频
+就是在后台一直播放一个无声的音乐文件，可以轻松的突破600s的限制
+app进入后台后audiosession不能被打断，如果">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BuildActiveArchitectureOnly">
-<meta property="og:url" content="http://yoursite.com/2015/12/04/BuildActiveArchitectureOnly/index.html">
+<meta property="og:title" content="iOS应用程序在后台保持运行实现方式">
+<meta property="og:url" content="http://yoursite.com/2015/12/26/iOS应用程序在后台保持运行实现方式/index.html">
 <meta property="og:site_name" content="zjcdxzy">
-<meta property="og:description" content="Architectures
-Build Active Architecture Only
+<meta property="og:description" content="在iOS系统上应用程序在后台如何长时间运行
+播放音乐
+声明Audio
+获取GPS信号
 
-设置为NO的时候，会编译支持的所有的版本
-设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本">
-<meta property="og:image" content="http://7xosar.com1.z0.glb.clouddn.com/architectures.png">
-<meta property="og:updated_time" content="2015-12-14T02:16:11.000Z">
+iOS 长时间后台的两种方法iOS开启后台任务后只有600s的执行时间， 大约10分钟，现在需要实现在后台保持下载，或者需要在应用进入后台时仍然和服务器保持连接。
+后台播放一个静音的音频
+就是在后台一直播放一个无声的音乐文件，可以轻松的突破600s的限制
+app进入后台后audiosession不能被打断，如果">
+<meta property="og:updated_time" content="2015-12-28T01:56:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BuildActiveArchitectureOnly">
-<meta name="twitter:description" content="Architectures
-Build Active Architecture Only
+<meta name="twitter:title" content="iOS应用程序在后台保持运行实现方式">
+<meta name="twitter:description" content="在iOS系统上应用程序在后台如何长时间运行
+播放音乐
+声明Audio
+获取GPS信号
 
-设置为NO的时候，会编译支持的所有的版本
-设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本">
+iOS 长时间后台的两种方法iOS开启后台任务后只有600s的执行时间， 大约10分钟，现在需要实现在后台保持下载，或者需要在应用进入后台时仍然和服务器保持连接。
+后台播放一个静音的音频
+就是在后台一直播放一个无声的音乐文件，可以轻松的突破600s的限制
+app进入后台后audiosession不能被打断，如果">
 
 
 
@@ -85,7 +96,7 @@ Build Active Architecture Only
   };
 </script>
 
-  <title> BuildActiveArchitectureOnly | zjcdxzy </title>
+  <title> iOS应用程序在后台保持运行实现方式 | zjcdxzy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -225,7 +236,7 @@ Build Active Architecture Only
             
             
               
-                BuildActiveArchitectureOnly
+                iOS应用程序在后台保持运行实现方式
               
             
           </h1>
@@ -234,8 +245,8 @@ Build Active Architecture Only
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-04T16:08:26+08:00" content="2015-12-04">
-              2015-12-04
+            <time itemprop="dateCreated" datetime="2015-12-26T20:52:06+08:00" content="2015-12-26">
+              2015-12-26
             </time>
           </span>
 
@@ -244,8 +255,8 @@ Build Active Architecture Only
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Tips/" itemprop="url" rel="index">
-                    <span itemprop="name">Tips</span>
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
                   </a>
                 </span>
 
@@ -273,12 +284,19 @@ Build Active Architecture Only
       
 
       
-        <span itemprop="articleBody"><h4 id="Architectures">Architectures</h4><p><img src="http://7xosar.com1.z0.glb.clouddn.com/architectures.png" alt="Architectures"></p>
-<p><em>Build Active Architecture Only</em></p>
-<ol>
-<li>设置为NO的时候，会编译支持的所有的版本</li>
-<li>设置为YES的时候，是为Debug的时候速度更快，它只编译当前的architecture 版本</li>
+        <span itemprop="articleBody"><h2 id="在iOS系统上应用程序在后台如何长时间运行">在iOS系统上应用程序在后台如何长时间运行</h2><ol>
+<li>播放音乐</li>
+<li>声明Audio</li>
+<li>获取GPS信号</li>
 </ol>
+<h2 id="iOS_长时间后台的两种方法">iOS 长时间后台的两种方法</h2><p>iOS开启后台任务后只有600s的执行时间， 大约10分钟，现在需要实现在后台保持下载，或者需要在应用进入后台时仍然和服务器保持连接。</p>
+<h2 id="后台播放一个静音的音频">后台播放一个静音的音频</h2><ul>
+<li>就是在后台一直播放一个无声的音乐文件，可以轻松的突破600s的限制</li>
+<li>app进入后台后audiosession不能被打断，如果另一个程序使用KAudioSessionCategory_RecordAndPlay 或者 kAudioSessionCategory_SoloAmbientSound 那么本程序就会被立即打断。</li>
+<li>播放被打断后可以处理一个通知:audiosessioninterruption。在收到这个通知后可以做相应的处理，然后程序会立即被转入到休眠状态，被系统自动挂起，appdelegateDidEnterBackground回调函数会自动调用。</li>
+<li>被打断后建议直接停止下载服务，不需要再等待音频播放服务重启。</li>
+</ul>
+<h2 id="VoipSocket">VoipSocket</h2><p>VOIPSocket 可以在后台运行，当程序进入后台时，默认应用程序会别系统挂起，但是VOIPSocket因为受系统控制所以不在此列。可以在启动一个voipsocket，这样可以保证应用程序在后台运行。</p>
 </span>
       
     </div>
@@ -290,16 +308,16 @@ Build Active Architecture Only
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/04/工程模块化/" rel="next" title="工程模块化">
-                <i class="fa fa-chevron-left"></i> 工程模块化
+              <a href="/2015/12/21/pthread中函数的使用/" rel="next" title="pthread中函数的使用">
+                <i class="fa fa-chevron-left"></i> pthread中函数的使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/09/iOS播放器SDK版本更新日志/" rel="prev" title="iOS播放器SDK版本更新日志">
-                iOS播放器SDK版本更新日志 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/28/静态库支持cpu构架查看方式/" rel="prev" title="静态库支持cpu构架查看方式">
+                静态库支持cpu构架查看方式 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -432,7 +450,7 @@ Build Active Architecture Only
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Architectures"><span class="nav-number">1.</span> <span class="nav-text">Architectures</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在iOS系统上应用程序在后台如何长时间运行"><span class="nav-number">1.</span> <span class="nav-text">在iOS系统上应用程序在后台如何长时间运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS_长时间后台的两种方法"><span class="nav-number">2.</span> <span class="nav-text">iOS 长时间后台的两种方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后台播放一个静音的音频"><span class="nav-number">3.</span> <span class="nav-text">后台播放一个静音的音频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VoipSocket"><span class="nav-number">4.</span> <span class="nav-text">VoipSocket</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
