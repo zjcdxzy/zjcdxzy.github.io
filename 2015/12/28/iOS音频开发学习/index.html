@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ffmpeg," />
 
 
 
@@ -51,46 +51,34 @@
 
 
 
-<meta name="description" content="iOS 20151209 iOS官网SDK版本更新修改内容如下：
-
-修改直播启动播放时偶尔报错误的问题
-推流SDK之前和播放器打包放在一起，现在从播放器sdk中拆除
-
-PS：更新包体积较大附件不支持，已单独发给庆杭。
-iOS 20151204 iOS官网SDK版本更新修改内容如下：
-
-修改活动直播，活动id只有一路流时不支持小窗播放。
-修改是否支持小窗播放的接口.
-内部模块拆分，播放工程增加仅支持">
+<meta name="description" content="音频基础
+声波是一种机械波，是一种模拟信号。
+PCM，全称脉冲编码调制，是一种模拟信号的数字化的方法。
+采样精度（bit pre sample)，每个声音样本的采样位数。
+采样频率（sample rate）每秒钟采集多少个声音样本。
+声道（channel）：相互独立的音频信号数，单声道（mono）立体声（Stereo）
+语音帧（frame），In audio data a frame is one">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS播放器SDK版本更新日志">
-<meta property="og:url" content="http://yoursite.com/2015/12/09/iOS播放器SDK版本更新日志/index.html">
+<meta property="og:title" content="iOS音频开发学习">
+<meta property="og:url" content="http://yoursite.com/2015/12/28/iOS音频开发学习/index.html">
 <meta property="og:site_name" content="zjcdxzy">
-<meta property="og:description" content="iOS 20151209 iOS官网SDK版本更新修改内容如下：
-
-修改直播启动播放时偶尔报错误的问题
-推流SDK之前和播放器打包放在一起，现在从播放器sdk中拆除
-
-PS：更新包体积较大附件不支持，已单独发给庆杭。
-iOS 20151204 iOS官网SDK版本更新修改内容如下：
-
-修改活动直播，活动id只有一路流时不支持小窗播放。
-修改是否支持小窗播放的接口.
-内部模块拆分，播放工程增加仅支持">
-<meta property="og:updated_time" content="2015-12-14T02:16:11.000Z">
+<meta property="og:description" content="音频基础
+声波是一种机械波，是一种模拟信号。
+PCM，全称脉冲编码调制，是一种模拟信号的数字化的方法。
+采样精度（bit pre sample)，每个声音样本的采样位数。
+采样频率（sample rate）每秒钟采集多少个声音样本。
+声道（channel）：相互独立的音频信号数，单声道（mono）立体声（Stereo）
+语音帧（frame），In audio data a frame is one">
+<meta property="og:updated_time" content="2015-12-28T07:07:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS播放器SDK版本更新日志">
-<meta name="twitter:description" content="iOS 20151209 iOS官网SDK版本更新修改内容如下：
-
-修改直播启动播放时偶尔报错误的问题
-推流SDK之前和播放器打包放在一起，现在从播放器sdk中拆除
-
-PS：更新包体积较大附件不支持，已单独发给庆杭。
-iOS 20151204 iOS官网SDK版本更新修改内容如下：
-
-修改活动直播，活动id只有一路流时不支持小窗播放。
-修改是否支持小窗播放的接口.
-内部模块拆分，播放工程增加仅支持">
+<meta name="twitter:title" content="iOS音频开发学习">
+<meta name="twitter:description" content="音频基础
+声波是一种机械波，是一种模拟信号。
+PCM，全称脉冲编码调制，是一种模拟信号的数字化的方法。
+采样精度（bit pre sample)，每个声音样本的采样位数。
+采样频率（sample rate）每秒钟采集多少个声音样本。
+声道（channel）：相互独立的音频信号数，单声道（mono）立体声（Stereo）
+语音帧（frame），In audio data a frame is one">
 
 
 
@@ -102,7 +90,7 @@ iOS 20151204 iOS官网SDK版本更新修改内容如下：
   };
 </script>
 
-  <title> iOS播放器SDK版本更新日志 | zjcdxzy </title>
+  <title> iOS音频开发学习 | zjcdxzy </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -242,7 +230,7 @@ iOS 20151204 iOS官网SDK版本更新修改内容如下：
             
             
               
-                iOS播放器SDK版本更新日志
+                iOS音频开发学习
               
             
           </h1>
@@ -251,8 +239,8 @@ iOS 20151204 iOS官网SDK版本更新修改内容如下：
         <div class="post-meta">
           <span class="post-time">
             发表于
-            <time itemprop="dateCreated" datetime="2015-12-09T11:19:25+08:00" content="2015-12-09">
-              2015-12-09
+            <time itemprop="dateCreated" datetime="2015-12-28T15:05:28+08:00" content="2015-12-28">
+              2015-12-28
             </time>
           </span>
 
@@ -261,8 +249,8 @@ iOS 20151204 iOS官网SDK版本更新修改内容如下：
               &nbsp; | &nbsp; 分类于
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工作日志/" itemprop="url" rel="index">
-                    <span itemprop="name">工作日志</span>
+                  <a href="/categories/音视频开发/" itemprop="url" rel="index">
+                    <span itemprop="name">音视频开发</span>
                   </a>
                 </span>
 
@@ -290,53 +278,70 @@ iOS 20151204 iOS官网SDK版本更新修改内容如下：
       
 
       
-        <span itemprop="articleBody"><h3 id="iOS_20151209_iOS官网SDK版本更新">iOS 20151209 iOS官网SDK版本更新</h3><p><em>修改内容如下：</em></p>
-<ol>
-<li>修改直播启动播放时偶尔报错误的问题</li>
-<li>推流SDK之前和播放器打包放在一起，现在从播放器sdk中拆除</li>
-</ol>
-<p>PS：更新包体积较大附件不支持，已单独发给庆杭。</p>
-<h3 id="iOS_20151204_iOS官网SDK版本更新">iOS 20151204 iOS官网SDK版本更新</h3><p><em>修改内容如下：</em></p>
-<ol>
-<li>修改活动直播，活动id只有一路流时不支持小窗播放。</li>
-<li>修改是否支持小窗播放的接口.</li>
-<li>内部模块拆分，播放工程增加仅支持点播播放的target。</li>
-<li>修改文件引用，便于支持打包广告和非广告的sdk</li>
-<li>修改频繁出现的linkshell鉴权失败的问题。</li>
-<li>linkshell地址请求真实RTMP地址时，增加对错误码400和429的区分，400 为连接cdn出错，429为cde鉴权错误</li>
-</ol>
-<p>PS：更新包体积较大附件不支持，已单独发给庆杭。</p>
-<h3 id="iOS_20151201_iOS官网SDK版本更新">iOS 20151201 iOS官网SDK版本更新</h3><p><em>修改内容如下：</em></p>
-<ol>
-<li>修改上报ch参数规则，点播为bcloud_userid.直播为customerId</li>
-<li>点播初始化时，修改音量接口值为<code>0</code>的bug。</li>
-<li>修改推流sdk，支持的x86_64和i386</li>
-<li>调度地址增加ch参数</li>
-<li>点播日志修改，sdk可以打印出真实的GPC返回的播放地址，调度地址，最终播放地址，供用户调试。</li>
-</ol>
-<p>PS：更新包体积较大附件不支持，已单独发给庆杭。</p>
+        <span itemprop="articleBody"><h2 id="音频基础">音频基础</h2><ul>
+<li>声波是一种机械波，是一种模拟信号。</li>
+<li>PCM，全称脉冲编码调制，是一种模拟信号的数字化的方法。</li>
+<li>采样精度（bit pre sample)，每个声音样本的采样位数。</li>
+<li>采样频率（sample rate）每秒钟采集多少个声音样本。</li>
+<li>声道（channel）：相互独立的音频信号数，单声道（mono）立体声（Stereo）</li>
+<li>语音帧（frame），In audio data a frame is one sample across all channels.</li>
+</ul>
+<h2 id="iOS_开发中对应的结构">iOS 开发中对应的结构</h2><h3 id="AudioStreamBasicDescription_结构体">AudioStreamBasicDescription 结构体</h3><pre><code><span class="class"><span class="keyword">struct</span> <span class="title">AudioStreamBasicDescription</span>
+</span>{
+    <span class="built_in">Float64</span>             mSampleRate;
+    AudioFormatID       mFormatID;
+    AudioFormatFlags    mFormatFlags;
+    <span class="built_in">UInt32</span>              mBytesPerPacket;
+    <span class="built_in">UInt32</span>              mFramesPerPacket;
+    <span class="built_in">UInt32</span>              mBytesPerFrame;
+    <span class="built_in">UInt32</span>              mChannelsPerFrame;
+    <span class="built_in">UInt32</span>              mBitsPerChannel;
+    <span class="built_in">UInt32</span>              mReserved;
+};
+</code></pre><p><strong>mSampleRate</strong>：The number of frames per second of the data in the stream.</p>
+<p><strong>mFormatID</strong>:An identifier specifying the general audio data format in the stream. (kAudioFormatLinearPCM, etc.)</p>
+<p><strong>mFormatFlags</strong>:Format-specific flags to specify details of the format.(kLinearPCMFormatFlagIsSignedInteger, kLinearPCMFormatFlagIsFloat, kLinearPCMFormatFlagIsBigEndian, kLinearPCMFormatFlagIsPacked, kLinearPCMFormatFlagIsNonInterleaved, etc.)</p>
+<p><strong>mBytesPerPacket</strong>:The number of bytes in a packet of data<br><strong>mFramesPerPacket</strong>:The number of sample frames in each packet of data.<br><strong>mBytesPerFrame</strong>:The number of bytes in a single sample frame of data.<br><strong>mChannelsPerFrame</strong>:The number of channels in each frame of data<br><strong>mBitsPerChannel</strong>:The number of bits of sample data for each channel in a frame of data.</p>
+<h3 id="数据样例">数据样例</h3><pre><code>(AudioStreamBasicDescription) _format = {
+  mSampleRate = <span class="number">44100</span> 
+  mFormatID = kAudioFormatLinearPCM 
+  mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked 
+  mBytesPerPacket = <span class="number">1</span> 
+  mFramesPerPacket = <span class="number">1152</span> 
+  mBytesPerFrame = <span class="number">0</span> 
+  mChannelsPerFrame = <span class="number">2</span> 
+  mBitsPerChannel = <span class="number">0</span> 
+  mReserved = <span class="number">0</span> 
+} 
+</code></pre><h2 id="iOS音频框架">iOS音频框架</h2><h3 id="苹果提供的处理音频的系统框架">苹果提供的处理音频的系统框架</h3><ul>
+<li>Audio Session Services</li>
+<li>Audio Unit Services</li>
+<li>Audio Convert Services </li>
+</ul>
 </span>
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ffmpeg/" rel="tag">#ffmpeg</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/04/BuildActiveArchitectureOnly/" rel="next" title="BuildActiveArchitectureOnly">
-                <i class="fa fa-chevron-left"></i> BuildActiveArchitectureOnly
+              <a href="/2015/12/28/静态库支持cpu构架查看方式/" rel="next" title="静态库支持cpu构架查看方式">
+                <i class="fa fa-chevron-left"></i> 静态库支持cpu构架查看方式
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/20/iOS开发中autoreleasepool使用说明/" rel="prev" title="iOS开发中@autoreleasepool使用说明">
-                iOS开发中@autoreleasepool使用说明 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -468,7 +473,7 @@ iOS 20151204 iOS官网SDK版本更新修改内容如下：
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS_20151209_iOS官网SDK版本更新"><span class="nav-number">1.</span> <span class="nav-text">iOS 20151209 iOS官网SDK版本更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS_20151204_iOS官网SDK版本更新"><span class="nav-number">2.</span> <span class="nav-text">iOS 20151204 iOS官网SDK版本更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iOS_20151201_iOS官网SDK版本更新"><span class="nav-number">3.</span> <span class="nav-text">iOS 20151201 iOS官网SDK版本更新</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#音频基础"><span class="nav-number">1.</span> <span class="nav-text">音频基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS_开发中对应的结构"><span class="nav-number">2.</span> <span class="nav-text">iOS 开发中对应的结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AudioStreamBasicDescription_结构体"><span class="nav-number">2.1.</span> <span class="nav-text">AudioStreamBasicDescription 结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据样例"><span class="nav-number">2.2.</span> <span class="nav-text">数据样例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS音频框架"><span class="nav-number">3.</span> <span class="nav-text">iOS音频框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#苹果提供的处理音频的系统框架"><span class="nav-number">3.1.</span> <span class="nav-text">苹果提供的处理音频的系统框架</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
