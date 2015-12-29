@@ -69,7 +69,8 @@ PCM，全称脉冲编码调制，是一种模拟信号的数字化的方法。
 采样频率（sample rate）每秒钟采集多少个声音样本。
 声道（channel）：相互独立的音频信号数，单声道（mono）立体声（Stereo）
 语音帧（frame），In audio data a frame is one">
-<meta property="og:updated_time" content="2015-12-28T07:07:20.000Z">
+<meta property="og:image" content="http://7xosar.com1.z0.glb.clouddn.com/core_audio_layers_2x.png">
+<meta property="og:updated_time" content="2015-12-29T01:40:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS音频开发学习">
 <meta name="twitter:description" content="音频基础
@@ -313,10 +314,15 @@ PCM，全称脉冲编码调制，是一种模拟信号的数字化的方法。
   mBitsPerChannel = <span class="number">0</span> 
   mReserved = <span class="number">0</span> 
 } 
-</code></pre><h2 id="iOS音频框架">iOS音频框架</h2><h3 id="苹果提供的处理音频的系统框架">苹果提供的处理音频的系统框架</h3><ul>
-<li>Audio Session Services</li>
-<li>Audio Unit Services</li>
-<li>Audio Convert Services </li>
+</code></pre><h2 id="iOS音频框架">iOS音频框架</h2><h3 id="苹果提供的处理音频的系统框架">苹果提供的处理音频的系统框架</h3><p><img src="http://7xosar.com1.z0.glb.clouddn.com/core_audio_layers_2x.png" alt=""></p>
+<ul>
+<li>如果需求是播放一段音频（File、Buffer或URL），AVAudioPlayer通常都可以满足需求。</li>
+<li>如果对性能有要求，或者是播放流式Buffer，那就得用到Audio Queue Services，Audio Queue播放是以Packet形式。<ol>
+<li>Extended Audio File Services有一些API，可用帮你计算每个包的大小；</li>
+<li>Audio File Service或Audio File Stream Services更智能，你只管塞数据给它，它自动把包组好给你。</li>
+<li>在ffmpeg软解播放器中可以使用Auido Queue实现音频播放。</li>
+</ol>
+</li>
 </ul>
 </span>
       
